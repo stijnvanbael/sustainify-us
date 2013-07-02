@@ -1,0 +1,687 @@
+
+{
+   "routes" : [
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 51.21024000000001,
+               "lng" : 3.746920000000001
+            },
+            "southwest" : {
+               "lat" : 51.029420,
+               "lng" : 3.217780
+            }
+         },
+         "copyrights" : "Map data ©2013 Google",
+         "legs" : [
+            {
+               "arrival_time" : {
+                  "text" : "2:22pm",
+                  "time_zone" : "Europe/Brussels",
+                  "value" : 1360848151
+               },
+               "departure_time" : {
+                  "text" : "11:33am",
+                  "time_zone" : "Europe/Brussels",
+                  "value" : 1360837980
+               },
+               "distance" : {
+                  "text" : "69.3 km",
+                  "value" : 69324
+               },
+               "duration" : {
+                  "text" : "2 hours 12 mins",
+                  "value" : 7896
+               },
+               "end_address" : "Moutstraat 34-50, 9000 Gent, Belgium",
+               "end_location" : {
+                  "lat" : 51.029420,
+                  "lng" : 3.734900000000001
+               },
+               "start_address" : "Waardamme Dorp, 8020 Oostkamp, Belgium",
+               "start_location" : {
+                  "lat" : 51.110080,
+                  "lng" : 3.221150
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "11.3 km",
+                        "value" : 11321
+                     },
+                     "duration" : {
+                        "text" : "23 mins",
+                        "value" : 1380
+                     },
+                     "end_location" : {
+                        "lat" : 51.198210,
+                        "lng" : 3.2180
+                     },
+                     "html_instructions" : "Bus towards Tielt - Zwevezele - Brugge",
+                     "polyline" : {
+                        "points" : "_m}vHectRaQfH_m@iAsd@{Ogi@{QaCkRwAyY{WjGuIi@sOz@{JlDcVgIoSyIyXsHsOQgThEee@fCac@dCwTe@eRmE{JkBcT`FcV|DaUnDyQnCmSdH|BrjA"
+                     },
+                     "start_location" : {
+                        "lat" : 51.110080,
+                        "lng" : 3.221150
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 51.19820520,
+                              "lng" : 3.21799740
+                           },
+                           "name" : "Brugge Station Perron 4"
+                        },
+                        "arrival_time" : {
+                           "text" : "11:56am",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1360839360
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 51.1100830,
+                              "lng" : 3.22115130
+                           },
+                           "name" : "Waardamme Dorp"
+                        },
+                        "departure_time" : {
+                           "text" : "11:33am",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1360837980
+                        },
+                        "headsign" : "Tielt - Zwevezele - Brugge",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "De Lijn",
+                                 "phone" : "070 22 02 00",
+                                 "url" : "http://www.delijn.be/"
+                              }
+                           ],
+                           "color" : "#ee8842",
+                           "name" : "Brugge - Zwevezele - Tielt",
+                           "short_name" : "21",
+                           "text_color" : "#000000",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 26
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "61 m",
+                        "value" : 61
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 61
+                     },
+                     "end_location" : {
+                        "lat" : 51.198740,
+                        "lng" : 3.217780
+                     },
+                     "html_instructions" : "Walk to Brugge Station Perron 2",
+                     "polyline" : {
+                        "points" : "ysnwHoosRiBj@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.198210,
+                        "lng" : 3.2180
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "61 m",
+                              "value" : 61
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 61
+                           },
+                           "end_location" : {
+                              "lat" : 51.198740,
+                              "lng" : 3.217780
+                           },
+                           "polyline" : {
+                              "points" : "ysnwHoosRiBj@"
+                           },
+                           "start_location" : {
+                              "lat" : 51.198210,
+                              "lng" : 3.2180
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "26.4 km",
+                        "value" : 26388
+                     },
+                     "duration" : {
+                        "text" : "36 mins",
+                        "value" : 2160
+                     },
+                     "end_location" : {
+                        "lat" : 51.181290,
+                        "lng" : 3.57430
+                     },
+                     "html_instructions" : "Bus towards Brugge - Eeklo Station (sneldienst)",
+                     "polyline" : {
+                        "points" : "cwnwHcnsRuX{oBem@wb@vDsoAxHwiAl_@csHbFuk@{U}kJ}UurK`VgLpBg~Fn~B{bNnPmq@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.198740,
+                        "lng" : 3.217780
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 51.18128780,
+                              "lng" : 3.57430030
+                           },
+                           "name" : "Eeklo Station - perron 2"
+                        },
+                        "arrival_time" : {
+                           "text" : "12:44pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1360842240
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 51.19874250,
+                              "lng" : 3.21778390
+                           },
+                           "name" : "Brugge Station Perron 2"
+                        },
+                        "departure_time" : {
+                           "text" : "12:08pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1360840080
+                        },
+                        "headsign" : "Brugge - Eeklo Station (sneldienst)",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "De Lijn",
+                                 "phone" : "070 22 02 00",
+                                 "url" : "http://www.delijn.be/"
+                              }
+                           ],
+                           "color" : "#229906",
+                           "name" : "Eeklo - Brugge (sneldienst)",
+                           "short_name" : "58S",
+                           "text_color" : "#ffffff",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 12
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "62 m",
+                        "value" : 62
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 62
+                     },
+                     "end_location" : {
+                        "lat" : 51.181850,
+                        "lng" : 3.574450
+                     },
+                     "html_instructions" : "Walk to Eeklo Overweg",
+                     "polyline" : {
+                        "points" : "ajkwHkbyToB]"
+                     },
+                     "start_location" : {
+                        "lat" : 51.181290,
+                        "lng" : 3.57430
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "62 m",
+                              "value" : 62
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 62
+                           },
+                           "end_location" : {
+                              "lat" : 51.181850,
+                              "lng" : 3.574450
+                           },
+                           "polyline" : {
+                              "points" : "ajkwHkbyToB]"
+                           },
+                           "start_location" : {
+                              "lat" : 51.181290,
+                              "lng" : 3.57430
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "13.8 km",
+                        "value" : 13757
+                     },
+                     "duration" : {
+                        "text" : "19 mins",
+                        "value" : 1140
+                     },
+                     "end_location" : {
+                        "lat" : 51.17953000000001,
+                        "lng" : 3.746920000000001
+                     },
+                     "html_instructions" : "Bus towards Eeklo - Ertvelde - Zelzate Busstation",
+                     "polyline" : {
+                        "points" : "qmkwHicyT|Bwo@mAav@oFy\\gFgZyFwyAeE{rAsJkHgUdKoTg]~Xiv@p\\{u@mD{y@aBweCiJ}YgKwc@`Ks}@|UcgAg@my@`]_mAzKqj@aBw_@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.181850,
+                        "lng" : 3.574450
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 51.17953490,
+                              "lng" : 3.74691750
+                           },
+                           "name" : "Ertvelde Kerk"
+                        },
+                        "arrival_time" : {
+                           "text" : "1:19pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1360844340
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 51.18184610,
+                              "lng" : 3.57444810
+                           },
+                           "name" : "Eeklo Overweg"
+                        },
+                        "departure_time" : {
+                           "text" : "1:00pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1360843200
+                        },
+                        "headsign" : "Eeklo - Ertvelde - Zelzate Busstation",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "De Lijn",
+                                 "phone" : "070 22 02 00",
+                                 "url" : "http://www.delijn.be/"
+                              }
+                           ],
+                           "color" : "#ffccda",
+                           "name" : "Eeklo - Ertvelde - Zelzate",
+                           "short_name" : "97",
+                           "text_color" : "#000000",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 21
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.2 km",
+                        "value" : 191
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 191
+                     },
+                     "end_location" : {
+                        "lat" : 51.17785000000001,
+                        "lng" : 3.746310
+                     },
+                     "html_instructions" : "Walk to Ertvelde Marktplein",
+                     "polyline" : {
+                        "points" : "a_kwHgyzUnIxB"
+                     },
+                     "start_location" : {
+                        "lat" : 51.17953000000001,
+                        "lng" : 3.746920000000001
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "0.2 km",
+                              "value" : 191
+                           },
+                           "duration" : {
+                              "text" : "3 mins",
+                              "value" : 191
+                           },
+                           "end_location" : {
+                              "lat" : 51.17785000000001,
+                              "lng" : 3.746310
+                           },
+                           "polyline" : {
+                              "points" : "a_kwHgyzUnIxB"
+                           },
+                           "start_location" : {
+                              "lat" : 51.17953000000001,
+                              "lng" : 3.746920000000001
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "16.3 km",
+                        "value" : 16268
+                     },
+                     "duration" : {
+                        "text" : "33 mins",
+                        "value" : 1980
+                     },
+                     "end_location" : {
+                        "lat" : 51.038640,
+                        "lng" : 3.730720
+                     },
+                     "html_instructions" : "Bus towards Zelzate - Gent St Pieters",
+                     "polyline" : {
+                        "points" : "qtjwHmuzU`OvEz_@xO~mAzd@zQxGnn@|Rvf@~@nP{CbUmBj\\gIrg@wLpY_Jj[uFdHY~N|e@h}@fZ|\\dJxS{At^~MnPtBzi@mBtVcDvZgBpNs@xK|CpNzIzOcIzUkMbNqQpHmFvXzDpSwKrI~ErO~@vFzH"
+                     },
+                     "start_location" : {
+                        "lat" : 51.17785000000001,
+                        "lng" : 3.746310
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 51.03864350,
+                              "lng" : 3.73072210
+                           },
+                           "name" : "Gent Terplatenbrug"
+                        },
+                        "arrival_time" : {
+                           "text" : "2:07pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1360847220
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 51.17785079999999,
+                              "lng" : 3.74631070
+                           },
+                           "name" : "Ertvelde Marktplein"
+                        },
+                        "departure_time" : {
+                           "text" : "1:34pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1360845240
+                        },
+                        "headsign" : "Zelzate - Gent St Pieters",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "De Lijn",
+                                 "phone" : "070 22 02 00",
+                                 "url" : "http://www.delijn.be/"
+                              }
+                           ],
+                           "color" : "#ff88ca",
+                           "name" : "Gent - Zelzate",
+                           "short_name" : "55",
+                           "text_color" : "#000000",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 34
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "1.3 km",
+                        "value" : 1276
+                     },
+                     "duration" : {
+                        "text" : "15 mins",
+                        "value" : 922
+                     },
+                     "end_location" : {
+                        "lat" : 51.029420,
+                        "lng" : 3.734900000000001
+                     },
+                     "html_instructions" : "Walk to Moutstraat 34-50, 9000 Gent, Belgium",
+                     "polyline" : {
+                        "points" : "onovH_twUA?N|@BHDF@@?@?RXE?n@?@?@?H?N?v@?F?Vn@a@f@c@nAcAlAmA~@_AhBkBjAsAhAuAf@i@TUTUh@i@VSx@k@p@g@p@m@ZOTElBUhAKTCr@SRCNKFENKn@e@xBwAPOV]FNN~@dCsAnBiAf@[FVRfB"
+                     },
+                     "start_location" : {
+                        "lat" : 51.038640,
+                        "lng" : 3.730720
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "33 m",
+                              "value" : 33
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 19
+                           },
+                           "end_location" : {
+                              "lat" : 51.038510,
+                              "lng" : 3.730310000000001
+                           },
+                           "html_instructions" : "Head \u003cb\u003esouthwest\u003c/b\u003e on \u003cb\u003eTer Platen\u003c/b\u003e toward \u003cb\u003eSint-Lievenslaan/R40\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "onovH_twUA?N|@BHDF@@"
+                           },
+                           "start_location" : {
+                              "lat" : 51.038640,
+                              "lng" : 3.730720
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "8 m",
+                              "value" : 8
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 6
+                           },
+                           "end_location" : {
+                              "lat" : 51.038510,
+                              "lng" : 3.73020
+                           },
+                           "html_instructions" : "Slight \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eSint-Lievenslaan/R40\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "umovHmqwU?@?R"
+                           },
+                           "start_location" : {
+                              "lat" : 51.038510,
+                              "lng" : 3.730310000000001
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "15 m",
+                              "value" : 15
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 17
+                           },
+                           "end_location" : {
+                              "lat" : 51.038380,
+                              "lng" : 3.730230
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eTer Platen\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "umovHwpwUXE"
+                           },
+                           "start_location" : {
+                              "lat" : 51.038510,
+                              "lng" : 3.73020
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "58 m",
+                              "value" : 58
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 46
+                           },
+                           "end_location" : {
+                              "lat" : 51.038380,
+                              "lng" : 3.72940
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eTerplaetenbrug/R40\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "{lovH}pwU?n@?@?@?H?N?v@?F?V"
+                           },
+                           "start_location" : {
+                              "lat" : 51.038380,
+                              "lng" : 3.730230
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "0.9 km",
+                              "value" : 911
+                           },
+                           "duration" : {
+                              "text" : "11 mins",
+                              "value" : 664
+                           },
+                           "end_location" : {
+                              "lat" : 51.03111000000001,
+                              "lng" : 3.735010
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eStropkaai\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "{lovHwkwUn@a@f@c@nAcAlAmA~@_AhBkBjAsAhAuAf@i@TUTUh@i@VSx@k@p@g@p@m@ZOTElBUhAKTCr@SRCNKFENKn@e@xBwAPOV]"
+                           },
+                           "start_location" : {
+                              "lat" : 51.038380,
+                              "lng" : 3.72940
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "32 m",
+                              "value" : 32
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 22
+                           },
+                           "end_location" : {
+                              "lat" : 51.030990,
+                              "lng" : 3.734610
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e at \u003cb\u003eMoutstraat\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "m_nvHynxUFNN~@"
+                           },
+                           "start_location" : {
+                              "lat" : 51.03111000000001,
+                              "lng" : 3.735010
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "0.2 km",
+                              "value" : 172
+                           },
+                           "duration" : {
+                              "text" : "2 mins",
+                              "value" : 112
+                           },
+                           "end_location" : {
+                              "lat" : 51.029560,
+                              "lng" : 3.735540
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e toward \u003cb\u003eMoutstraat\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eRestricted usage road\u003c/div\u003e",
+                           "polyline" : {
+                              "points" : "u~mvHilxUdCsAnBiAf@["
+                           },
+                           "start_location" : {
+                              "lat" : 51.030990,
+                              "lng" : 3.734610
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "47 m",
+                              "value" : 47
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 36
+                           },
+                           "end_location" : {
+                              "lat" : 51.029420,
+                              "lng" : 3.734900000000001
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eMoutstraat\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "wumvHcrxUFVRfB"
+                           },
+                           "start_location" : {
+                              "lat" : 51.029560,
+                              "lng" : 3.735540
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  }
+               ],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : {
+            "points" : "_m}vHectRaQfH_m@iA{nAwb@aCkRwAyY{WjGuIi@sOz@{JlDcVgIoSyIyXsHsOQgThEee@fCac@dCwTe@eRmE{JkBcT`FcV|DaUnDyQnCmSdH|BrjAiBj@uX{oBem@wb@vDsoAxHwiAl_@csHbFuk@{U}kJ}UurK`VgLpBg~Fn~B{bNnPmq@oB]|Bwo@mAav@oFy\\gFgZyFwyAeE{rAsJkHgUdKoTg]~Xiv@p\\{u@mD{y@aBweCiJ}YgKwc@`Ks}@|UcgAg@my@`]_mAzKqj@aBw_@nIxB`OvEz_@xO~mAzd@zQxGnn@|Rvf@~@nP{CbUmBj\\gIrg@wLpY_Jj[uFdHY~N|e@h}@fZ|\\dJxS{At^~MnPtBzi@mBtVcDvZgBpNs@xK|CpNzIzOcIzUkMbNqQpHmFvXzDpSwKrI~ErO~@vFzHL|@HP@B?RXE?p@?J?fBn@a@f@c@nAcAlAmAhDkDtCiD|B_CpA_AbBuAZOTEvDa@hAWRCNKVQhD}Bh@m@VnAtF}Cf@[FVRfB"
+         },
+         "warnings" : [
+            "Walking directions are in beta.    Use caution – This route may be missing sidewalks or pedestrian paths."
+         ],
+         "waypoint_order" : []
+      }
+   ],
+   "status" : "OK"
+}

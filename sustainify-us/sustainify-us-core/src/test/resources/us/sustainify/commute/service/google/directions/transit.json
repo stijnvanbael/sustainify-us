@@ -1,0 +1,480 @@
+
+{
+   "routes" : [
+      {
+         "bounds" : {
+            "northeast" : {
+               "lat" : 51.100880,
+               "lng" : 3.730480000000001
+            },
+            "southwest" : {
+               "lat" : 50.993740,
+               "lng" : 3.205790
+            }
+         },
+         "copyrights" : "Map data ©2013 Google",
+         "legs" : [
+            {
+               "arrival_time" : {
+                  "text" : "1:37pm",
+                  "time_zone" : "Europe/Brussels",
+                  "value" : 1359635831
+               },
+               "departure_time" : {
+                  "text" : "11:39am",
+                  "time_zone" : "Europe/Brussels",
+                  "value" : 1359628744
+               },
+               "distance" : {
+                  "text" : "55.8 km",
+                  "value" : 55762
+               },
+               "duration" : {
+                  "text" : "1 hour 44 mins",
+                  "value" : 6211
+               },
+               "end_address" : "Reep 44, 9000 Gent, Belgium",
+               "end_location" : {
+                  "lat" : 51.05340,
+                  "lng" : 3.730480000000001
+               },
+               "start_address" : "Torhoutsestraat 3, 8020 Oostkamp, Belgium",
+               "start_location" : {
+                  "lat" : 51.09594000000001,
+                  "lng" : 3.206590
+               },
+               "steps" : [
+                  {
+                     "distance" : {
+                        "text" : "67 m",
+                        "value" : 67
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 57
+                     },
+                     "end_location" : {
+                        "lat" : 51.09608000000001,
+                        "lng" : 3.205790
+                     },
+                     "html_instructions" : "Walk to Ruddervoorde Dorp",
+                     "polyline" : {
+                        "points" : "stzvHehqRQ@?bA@fAMB@L"
+                     },
+                     "start_location" : {
+                        "lat" : 51.09594000000001,
+                        "lng" : 3.206590
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "10 m",
+                              "value" : 10
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 8
+                           },
+                           "end_location" : {
+                              "lat" : 51.09603000000001,
+                              "lng" : 3.206580
+                           },
+                           "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eTorhoutsestraat\u003c/b\u003e toward \u003cb\u003eSijslostraat/N368\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "stzvHehqRQ@"
+                           },
+                           "start_location" : {
+                              "lat" : 51.09594000000001,
+                              "lng" : 3.206590
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "49 m",
+                              "value" : 49
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 38
+                           },
+                           "end_location" : {
+                              "lat" : 51.096020,
+                              "lng" : 3.205880
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eSijslostraat/N368\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "euzvHchqR?bA@fA"
+                           },
+                           "start_location" : {
+                              "lat" : 51.09603000000001,
+                              "lng" : 3.206580
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "8 m",
+                              "value" : 8
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 11
+                           },
+                           "end_location" : {
+                              "lat" : 51.09608000000001,
+                              "lng" : 3.205790
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eSint-Elooisplein\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "cuzvHwcqRMB@L"
+                           },
+                           "start_location" : {
+                              "lat" : 51.096020,
+                              "lng" : 3.205880
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "19.4 km",
+                        "value" : 19397
+                     },
+                     "duration" : {
+                        "text" : "30 mins",
+                        "value" : 1800
+                     },
+                     "end_location" : {
+                        "lat" : 50.99380000000001,
+                        "lng" : 3.326020000000001
+                     },
+                     "html_instructions" : "Bus towards Brugge - Zwevezele - Tielt",
+                     "polyline" : {
+                        "points" : "ouzvHecqRiRkx@uIkr@bu@`Ar[cBplAbUlQ}C`_AgZtZ{Hb_@j@l[eBmS_iBmWucBmGcp@oLkm@dC{LrMgl@pw@qnAt`Bgh@lbBap@t_A{}@|H_NhSiBpO~O~SoW"
+                     },
+                     "start_location" : {
+                        "lat" : 51.09608000000001,
+                        "lng" : 3.205790
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 50.99380180,
+                              "lng" : 3.32602360
+                           },
+                           "name" : "Tielt Vierhoek"
+                        },
+                        "arrival_time" : {
+                           "text" : "12:10pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1359630600
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 51.09607920,
+                              "lng" : 3.20579040
+                           },
+                           "name" : "Ruddervoorde Dorp"
+                        },
+                        "departure_time" : {
+                           "text" : "11:40am",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1359628800
+                        },
+                        "headsign" : "Brugge - Zwevezele - Tielt",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "De Lijn",
+                                 "phone" : "070 22 02 00",
+                                 "url" : "http://www.delijn.be/"
+                              }
+                           ],
+                           "color" : "#ee8842",
+                           "name" : "Brugge - Zwevezele - Tielt",
+                           "short_name" : "21",
+                           "text_color" : "#000000",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 24
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "23 m",
+                        "value" : 23
+                     },
+                     "duration" : {
+                        "text" : "1 min",
+                        "value" : 23
+                     },
+                     "end_location" : {
+                        "lat" : 50.993740,
+                        "lng" : 3.326340
+                     },
+                     "html_instructions" : "Walk to Tielt Vierhoek",
+                     "polyline" : {
+                        "points" : "gvfvHsrhSJ_A"
+                     },
+                     "start_location" : {
+                        "lat" : 50.99380000000001,
+                        "lng" : 3.326020000000001
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "23 m",
+                              "value" : 23
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 23
+                           },
+                           "end_location" : {
+                              "lat" : 50.993740,
+                              "lng" : 3.326340
+                           },
+                           "polyline" : {
+                              "points" : "gvfvHsrhSJ_A"
+                           },
+                           "start_location" : {
+                              "lat" : 50.99380000000001,
+                              "lng" : 3.326020000000001
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "33.3 km",
+                        "value" : 33301
+                     },
+                     "duration" : {
+                        "text" : "57 mins",
+                        "value" : 3420
+                     },
+                     "end_location" : {
+                        "lat" : 51.055820,
+                        "lng" : 3.693390000000001
+                     },
+                     "html_instructions" : "Bus towards Tielt - Nevele - Drongen - Gent",
+                     "polyline" : {
+                        "points" : "{ufvHsthSeLkUmXaQ}TsRmFga@wd@ewB_a@ch@cd@sv@{h@mgAgh@wo@}_@eB_AaUIau@{Gig@kCmOcI_oC`WcZvGmWwUyz@kU^cN}PvM_PnF_y@bI__Ag@ykAzVyfAhNky@`J{pAlBgw@~P_c@mAu`@sQsE`Rmd@lWwEnW}]|Tue@nZwt@nC}FlPs^mEuQ}Rqf@qdAybAkQwH}JkP}Gq\\wIyg@qJsyAmPmp@yNg\\}b@iaA_Awc@uGlAaJbDi@u`BoBu[_Fyq@yAcS"
+                     },
+                     "start_location" : {
+                        "lat" : 50.993740,
+                        "lng" : 3.326340
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 51.05582090,
+                              "lng" : 3.69338920
+                           },
+                           "name" : "Gent Malemstraat"
+                        },
+                        "arrival_time" : {
+                           "text" : "1:12pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1359634320
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 50.99374170,
+                              "lng" : 3.32633830
+                           },
+                           "name" : "Tielt Vierhoek"
+                        },
+                        "departure_time" : {
+                           "text" : "12:15pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1359630900
+                        },
+                        "headsign" : "Tielt - Nevele - Drongen - Gent",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "De Lijn",
+                                 "phone" : "070 22 02 00",
+                                 "url" : "http://www.delijn.be/"
+                              }
+                           ],
+                           "color" : "#444421",
+                           "name" : "Gent - Drongen - Nevele - Tielt",
+                           "short_name" : "15",
+                           "text_color" : "#ffffff",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 56
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "2.7 km",
+                        "value" : 2713
+                     },
+                     "duration" : {
+                        "text" : "12 mins",
+                        "value" : 720
+                     },
+                     "end_location" : {
+                        "lat" : 51.051780,
+                        "lng" : 3.72820
+                     },
+                     "html_instructions" : "Bus towards (Merendree) - Drongen Luchteren - P+R Oostakker",
+                     "polyline" : {
+                        "points" : "{yrvHujpUoCsa@yGsTcDeK~Ju]nMib@ZuLpBq[vK{g@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.055820,
+                        "lng" : 3.693390000000001
+                     },
+                     "transit_details" : {
+                        "arrival_stop" : {
+                           "location" : {
+                              "lat" : 51.05178120,
+                              "lng" : 3.72820420
+                           },
+                           "name" : "Gent Duivelsteen"
+                        },
+                        "arrival_time" : {
+                           "text" : "1:34pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1359635640
+                        },
+                        "departure_stop" : {
+                           "location" : {
+                              "lat" : 51.05582090,
+                              "lng" : 3.69338920
+                           },
+                           "name" : "Gent Malemstraat"
+                        },
+                        "departure_time" : {
+                           "text" : "1:22pm",
+                           "time_zone" : "Europe/Brussels",
+                           "value" : 1359634920
+                        },
+                        "headsign" : "(Merendree) - Drongen Luchteren - P+R Oostakker",
+                        "line" : {
+                           "agencies" : [
+                              {
+                                 "name" : "De Lijn",
+                                 "phone" : "070 22 02 00",
+                                 "url" : "http://www.delijn.be/"
+                              }
+                           ],
+                           "color" : "#dd0077",
+                           "name" : "(Merendree)-Drongen Luchteren - P+R Oostakker",
+                           "short_name" : "18",
+                           "text_color" : "#ffffff",
+                           "vehicle" : {
+                              "icon" : "//maps.gstatic.com/mapfiles/transit/iw/6/bus.png",
+                              "name" : "Bus",
+                              "type" : "BUS"
+                           }
+                        },
+                        "num_stops" : 8
+                     },
+                     "travel_mode" : "TRANSIT"
+                  },
+                  {
+                     "distance" : {
+                        "text" : "0.3 km",
+                        "value" : 261
+                     },
+                     "duration" : {
+                        "text" : "3 mins",
+                        "value" : 191
+                     },
+                     "end_location" : {
+                        "lat" : 51.05340,
+                        "lng" : 3.730480000000001
+                     },
+                     "html_instructions" : "Walk to Reep 44, 9000 Gent, Belgium",
+                     "polyline" : {
+                        "points" : "s`rvHgdwUJc@V_@[g@cAwAUUkAy@o@g@m@a@o@_AWi@"
+                     },
+                     "start_location" : {
+                        "lat" : 51.051780,
+                        "lng" : 3.72820
+                     },
+                     "steps" : [
+                        {
+                           "distance" : {
+                              "text" : "18 m",
+                              "value" : 18
+                           },
+                           "duration" : {
+                              "text" : "1 min",
+                              "value" : 13
+                           },
+                           "end_location" : {
+                              "lat" : 51.05160000000001,
+                              "lng" : 3.728540
+                           },
+                           "html_instructions" : "Head \u003cb\u003esoutheast\u003c/b\u003e on \u003cb\u003eLieven Bauwensplein\u003c/b\u003e toward \u003cb\u003eReep\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "s`rvHgdwUJc@V_@"
+                           },
+                           "start_location" : {
+                              "lat" : 51.051780,
+                              "lng" : 3.72820
+                           },
+                           "travel_mode" : "WALKING"
+                        },
+                        {
+                           "distance" : {
+                              "text" : "0.2 km",
+                              "value" : 243
+                           },
+                           "duration" : {
+                              "text" : "3 mins",
+                              "value" : 178
+                           },
+                           "end_location" : {
+                              "lat" : 51.05340,
+                              "lng" : 3.730480000000001
+                           },
+                           "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eReep\u003c/b\u003e",
+                           "polyline" : {
+                              "points" : "o_rvHkfwU[g@cAwAUUkAy@o@g@m@a@o@_AWi@"
+                           },
+                           "start_location" : {
+                              "lat" : 51.05160000000001,
+                              "lng" : 3.728540
+                           },
+                           "travel_mode" : "WALKING"
+                        }
+                     ],
+                     "travel_mode" : "WALKING"
+                  }
+               ],
+               "via_waypoint" : []
+            }
+         ],
+         "overview_polyline" : {
+            "points" : "stzvHehqRQ@?bA@fAMB@LiRkx@uIkr@bu@`Ar[cBplAbUlQ}C`_AgZtZ{Hb_@j@l[eBmS_iBmWucBmGcp@oLkm@dC{LrMgl@pw@qnAt`Bgh@lbBap@t_A{}@|H_NhSiBpO~O~SoWJ_AeLkUmXaQ}TsRmFga@wd@ewB_a@ch@cd@sv@{h@mgAgh@wo@}_@eB_AaUIau@{Gig@kCmOcI_oC`WcZvGmWwUyz@kU^cN}PvM_PnF_y@bI__Ag@ykAzVyfAhNky@`J{pAlBgw@~P_c@mAu`@sQsE`Rmd@lWwEnW}]|Tue@nZwt@|Tqf@mEuQ}Rqf@qdAybAkQwH}JkP}Gq\\wIyg@qJsyAmPmp@yNg\\}b@iaA_Awc@uGlAaJbDi@u`BoBu[yH}eAoCsa@yGsTcDeK~Ju]nMib@ZuLpBq[vK{g@Jc@V_@_B_CUUkAy@}AiAo@_AWi@"
+         },
+         "warnings" : [
+            "Walking directions are in beta.    Use caution – This route may be missing sidewalks or pedestrian paths."
+         ],
+         "waypoint_order" : []
+      }
+   ],
+   "status" : "OK"
+}

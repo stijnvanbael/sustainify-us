@@ -1,0 +1,29 @@
+<html>
+<body>
+	@Repeat(items=routes, var="route")
+	<div class="route">
+		<p class="route-score">
+			<span class="badge badge-success">+${route.score}</span>
+		</p>
+		
+		@ShowIf(!route.chosen)
+		<input type="radio" name="routeIndex" id="route.${index}" value="${index}" />
+		
+		@ShowIf(route.chosen)
+		<input type="radio" name="routeIndex" id="route.${index}" value="${index}" checked="checked" />
+		
+		<ul class="route-data">
+			@Repeat(items=route.subroutes, var="subroute")
+			<li data-origin="${subroute.origin}" data-destination="${subroute.destination}" 
+				data-arrival-time="${subroute.arrivalTime}" data-travel-mode="${subroute.travelMode}">
+			</li>
+		</ul>
+		
+		<label for="route.${index}">${route.workLocation} ${route.description}</label>
+		<p class="route-summary">
+			@Repeat(items=route.summary, var="travelMode")
+			<span class="subroute ${travelMode.id}" title="${travelMode.description}">${travelMode.distance}</span>
+		</p>
+	</div>
+</body>
+</html>

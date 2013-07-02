@@ -1,0 +1,12 @@
+<html>
+<body>
+@ShowIf(active)
+<li class="active">
+	<a href="${uri}">${caption}</a>
+</li>
+@ShowIf(!active)
+<li>
+	<a href="${uri}">${caption}</a>
+</li>
+</body>
+</html>
