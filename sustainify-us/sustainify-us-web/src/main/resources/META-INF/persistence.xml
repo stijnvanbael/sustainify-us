@@ -5,6 +5,7 @@
 	<persistence-unit name="sustainify-us"
 		transaction-type="RESOURCE_LOCAL">
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		<non-jta-data-source>jdbc/sustainify-ds</non-jta-data-source>
 		<class>us.sustainify.common.domain.model.organisation.SustainifyUser</class>
 		<class>us.sustainify.common.domain.model.organisation.Organisation</class>
 		<class>us.sustainify.common.domain.model.organisation.OrganisationLocation</class>
@@ -15,11 +16,6 @@
         <class>be.appify.framework.security.domain.User</class>
         <class>be.appify.framework.security.domain.Authentication</class>
 		<properties>
-			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-			<property name="javax.persistence.jdbc.url"
-				value="jdbc:mysql://ec2-23-21-211-172.compute-1.amazonaws.com/sustainify-us-test" />
-			<property name="javax.persistence.jdbc.user" value="sustainify-us" />
-			<property name="javax.persistence.jdbc.password" value="imagine512" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
             <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
             <property name="hibernate.c3p0.min_size" value="0"/>

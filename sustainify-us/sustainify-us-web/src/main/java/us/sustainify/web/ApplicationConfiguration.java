@@ -3,6 +3,8 @@ package us.sustainify.web;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityManagerFactory;
 
 import org.reflections.Reflections;
@@ -77,55 +79,64 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 
 			@Override
 			protected void configure() {
-				Cache cache = new HashMapCache();
-				bind(Cache.class).toInstance(cache);
-				EntityManagerFactory entityManagerFactory = javax.persistence.Persistence.createEntityManagerFactory("sustainify-us");
-				Persistence persistence = new JPAPersistence(entityManagerFactory);
-				bind(Persistence.class).toInstance(persistence);
+				try {
+					InitialContext context = new InitialContext();
 
-				GoogleLocationService locationService = new GoogleLocationService(new ApacheHttpTransport(), "AIzaSyCvvR7jLVHXJit5p0hmtuQlMfu6PPt1EtQ");
-				locationService.setRetryCount(5);
-				bind(LocationService.class).toInstance(locationService);
-				UserRepository<SustainifyUser> userRepository = new PersistentUserRepository<SustainifyUser>(persistence, SustainifyUser.class);
-				Sha1EncryptionService encryptionService = new Sha1EncryptionService("imagine512", "UTF-8");
+					Cache cache = new HashMapCache();
+					bind(Cache.class).toInstance(cache);
+					EntityManagerFactory entityManagerFactory = javax.persistence.Persistence.createEntityManagerFactory("sustainify-us");
+					Persistence persistence = new JPAPersistence(entityManagerFactory);
+					bind(Persistence.class).toInstance(persistence);
 
-				bind(new TypeLiteral<UserRepository<SustainifyUser>>() {
-				}).toInstance(userRepository);
-				AuthenticationRepository<SustainifyUser> authenticationRepository = new PersistentAuthenticationRepository<>(persistence);
-				bind(AuthenticationRepository.class).toInstance(authenticationRepository);
-				bind(ScoredRouteRepository.class).to(PersistentScoredRouteRepository.class);
-				bind(EncryptionService.class).toInstance(encryptionService);
-				bind(RouteChoiceService.class).to(DefaultRouteChoiceService.class);
+					GoogleLocationService locationService = new GoogleLocationService(new ApacheHttpTransport(),
+							(String) context.lookup("java:comp/env/ejb/GoogleLocationService/key"));
+					locationService.setRetryCount(5);
+					bind(LocationService.class).toInstance(locationService);
+					UserRepository<SustainifyUser> userRepository = new PersistentUserRepository<SustainifyUser>(persistence, SustainifyUser.class);
+					Sha1EncryptionService encryptionService = new Sha1EncryptionService(
+							(String) context.lookup("java:comp/env/ejb/EncryptionService/salt"), "UTF-8");
 
-				AuthenticationService<SustainifyUser, SimpleCredential<SustainifyUser>> authenticationService = new SimpleAuthenticationService<>(
-						userRepository, authenticationRepository);
-				bind(new TypeLiteral<AuthenticationService<SustainifyUser, SimpleCredential<SustainifyUser>>>() {
-				}).toInstance(authenticationService);
-				HttpTransport transport = new ApacheHttpTransport();
+					bind(new TypeLiteral<UserRepository<SustainifyUser>>() {
+					}).toInstance(userRepository);
+					AuthenticationRepository<SustainifyUser> authenticationRepository = new PersistentAuthenticationRepository<>(persistence);
+					bind(AuthenticationRepository.class).toInstance(authenticationRepository);
+					bind(ScoredRouteRepository.class).to(PersistentScoredRouteRepository.class);
+					bind(EncryptionService.class).toInstance(encryptionService);
+					bind(RouteChoiceService.class).to(DefaultRouteChoiceService.class);
 
-				GoogleDirectionsService directionsService = new GoogleDirectionsService(transport, new PersistentRouteRepository(persistence), cache);
-				directionsService.setRetryCount(5);
+					AuthenticationService<SustainifyUser, SimpleCredential<SustainifyUser>> authenticationService = new SimpleAuthenticationService<>(
+							userRepository, authenticationRepository);
+					bind(new TypeLiteral<AuthenticationService<SustainifyUser, SimpleCredential<SustainifyUser>>>() {
+					}).toInstance(authenticationService);
+					HttpTransport transport = new ApacheHttpTransport();
 
-				WundergroundWeatherService weatherService = new WundergroundWeatherService(transport, "f008e7c5ca6242b5");
-				weatherService.setRetryCount(5);
-				WeatherScore weatherScore = WeatherScore.withService(weatherService).base(100)
-						.subtract(1).perDegreeBelow(Temperature.degreesCelcius(15))
-						.subtract(1).perDegreeAbove(Temperature.degreesCelcius(25))
-						.subtract(10).perMillimeterPrecipitation()
-						.subtract(1).perKilometerPerHourWindSpeedAbove(Speed.kilometersPerHour(10));
-				RouteService routeService = new DefaultRouteService(directionsService,
-						DesirabilityScore.forTravelMode(TravelMode.BICYCLING).base(0).subtract(1).perMinute().addWeatherScore(weatherScore),
-						DesirabilityScore.forTravelMode(TravelMode.WALKING).base(20).subtract(1).perMinute().addWeatherScore(weatherScore),
-						DesirabilityScore.forTravelMode(TravelMode.PUBLIC_TRANSIT).base(80).subtract(1).perMinute(),
-						DesirabilityScore.forTravelMode(TravelMode.CAR).base(40).subtract(1).perMinute());
-				bind(RouteService.class).toInstance(routeService);
+					GoogleDirectionsService directionsService = new GoogleDirectionsService(transport, new PersistentRouteRepository(persistence), cache);
+					directionsService.setRetryCount(5);
 
-				ScoreService scoreService = new DefaultScoreService(
-						RouteScore.forTravelMode(TravelMode.BICYCLING).perKilometer(10).addWeatherScore(weatherScore),
-						RouteScore.forTravelMode(TravelMode.WALKING).perKilometer(10).addWeatherScore(weatherScore),
-						RouteScore.forTravelMode(TravelMode.PUBLIC_TRANSIT).perKilometer(5),
-						RouteScore.forTravelMode(TravelMode.CAR).perKilometer(1));
-				bind(ScoreService.class).toInstance(scoreService);
+					WundergroundWeatherService weatherService = new WundergroundWeatherService(transport,
+							(String) context.lookup("java:comp/env/ejb/WeatherUnderground/key"));
+					weatherService.setRetryCount(5);
+					WeatherScore weatherScore = WeatherScore.withService(weatherService).base(100)
+							.subtract(1).perDegreeBelow(Temperature.degreesCelcius(15))
+							.subtract(1).perDegreeAbove(Temperature.degreesCelcius(25))
+							.subtract(10).perMillimeterPrecipitation()
+							.subtract(1).perKilometerPerHourWindSpeedAbove(Speed.kilometersPerHour(10));
+					RouteService routeService = new DefaultRouteService(directionsService,
+							DesirabilityScore.forTravelMode(TravelMode.BICYCLING).base(0).subtract(1).perMinute().addWeatherScore(weatherScore),
+							DesirabilityScore.forTravelMode(TravelMode.WALKING).base(20).subtract(1).perMinute().addWeatherScore(weatherScore),
+							DesirabilityScore.forTravelMode(TravelMode.PUBLIC_TRANSIT).base(80).subtract(1).perMinute(),
+							DesirabilityScore.forTravelMode(TravelMode.CAR).base(40).subtract(1).perMinute());
+					bind(RouteService.class).toInstance(routeService);
+
+					ScoreService scoreService = new DefaultScoreService(
+							RouteScore.forTravelMode(TravelMode.BICYCLING).perKilometer(10).addWeatherScore(weatherScore),
+							RouteScore.forTravelMode(TravelMode.WALKING).perKilometer(10).addWeatherScore(weatherScore),
+							RouteScore.forTravelMode(TravelMode.PUBLIC_TRANSIT).perKilometer(5),
+							RouteScore.forTravelMode(TravelMode.CAR).perKilometer(1));
+					bind(ScoreService.class).toInstance(scoreService);
+				} catch (NamingException e) {
+					throw new RuntimeException(e);
+				}
 			}
 		});
 	}
