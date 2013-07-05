@@ -22,15 +22,18 @@
 		<session-timeout>30</session-timeout>
 	</session-config>
 	
-	<env-entry>
-		<env-entry-name>GoogleLocationService/key</env-entry-name>
-		<env-entry-type>java.lang.String</env-entry-type>
-		<env-entry-value>Google API key goes here</env-entry-value>
-	</env-entry>
+	
 	<env-entry>
 		<env-entry-name>EncryptionService/salt</env-entry-name>
 		<env-entry-type>java.lang.String</env-entry-type>
 		<env-entry-value>Encryption salt goes here</env-entry-value>
+	</env-entry>
+	
+	<!-- TODO: remove API keys here, get them from the DB -->
+	<env-entry>
+		<env-entry-name>GoogleLocationService/key</env-entry-name>
+		<env-entry-type>java.lang.String</env-entry-type>
+		<env-entry-value>Google API key goes here</env-entry-value>
 	</env-entry>
 	<env-entry>
 		<env-entry-name>WeatherUnderground/key</env-entry-name>
