@@ -1,4 +1,2 @@
 sustainify-us
 =============
-
-Sustainify.us
