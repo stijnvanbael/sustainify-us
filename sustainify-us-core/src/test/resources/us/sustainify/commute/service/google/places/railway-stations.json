@@ -1,0 +1,163 @@
+
+{
+   "html_attributions" : [],
+   "results" : [
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 51.1976710,
+               "lng" : 3.2178510
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "9403d777a68a14e485dd48a597a94c8b3e27173a",
+         "name" : "Station Brugge",
+         "photos" : [
+            {
+               "height" : 776,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRrAAAAvRnNEB0Z8Kd2IBz_XCDAh6L0zil8WxGNE6p_b-xh2IVW5eYScT579qMY1rPjbWIx6Y1zMfd_tePReyEeBS4Cli2rBy39QhynFJXU5H_bwspLu-rfO3ESfTrTafLsU5wVbd_IoJc8bdSq9crE2xcR2xIQoCaJmr5rJ7eKmESw0gmroBoUMTMQkjcYHYDjeojPKDXZorkfyPQ",
+               "width" : 1296
+            }
+         ],
+         "reference" : "CnRtAAAAbtu8jfoh7JieJpKkcJATKO2Ip3f7yoiSacPb9loK0ZzqJkp0AupPcGtLHixSJA30jiVaotdObkFLZjY3i0Dh973L3HhiR-40vxpe6hDn_Jxg34Z1CF5qrPxV-rt67_d_LQyyG5MNXE0bLUG1lD9R0hIQQG8H2Iws5hcOgg7oYpjijhoUlxZeOljLsLiDp01Ve-dF4Hww8oc",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Brugge"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 51.2231060,
+               "lng" : 3.2018370
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "65768c4889a682a59f7108f1419f2d50aace0250",
+         "name" : "Station Brugge-Sint-Pieters",
+         "reference" : "CoQBegAAAE24R3QUfUJ3cDuoy8pWQ85rNVzOuo_NUH7KA4R_PJrcMDcXxIzDjH-29Xr6lBd12I3y9JIipCUUraCQod5zbEiDl7yICjm4yKBYyJhmlgJfWKMbJTKBMtJxn4HJuvL-O-C1zphBQojK2tvbCveH6aL6K6BOLSou0cfrC5C1U9kVEhDfNJAx_p-0u3enboRB3mpBGhTO-mb0Hy02iZUpZTExFd-Fo8Tpkg",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Brugge"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.9905830,
+               "lng" : 3.329630
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "f13e9477c467aeb4dd926ea457de5f1a7e1dd517",
+         "name" : "Station Tielt",
+         "reference" : "CnRsAAAAkV6JCcxM7FZqP8Opv7vUKKaZvAXrLZRout1-Xn44nZdLd7MvwcSWamQF6mrqNjCLJJiyvQ3MY9I9Mi8yYIWk7BiID6PZKMoWqmvmJ4SwjLt5a2QfgT8mrGAN1Usx7XJNTtN5rO2p16I_cveoF9z7ExIQ51HESoiUg111E6_IjG8NCBoUDznWMV1J7bS8v0UwSg8ApngYvOs",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Tielt"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 51.0250,
+               "lng" : 3.043210
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "7f4e1bacf60aef3b37b3d2388ae557688ac31942",
+         "name" : "Kortemark",
+         "reference" : "CnRnAAAA0Gcty8k-SpDb92Vb0OtO0EQiKyQld52ucUs2VIYFNJIgX9ITwoObHbmCaTUexeCcSqKNmEp6aS68jclpq3bdLcFV4Lrsviepo_hRa_GPom_-Eiaas8jdC_S3dCaaMQRInVOfnB2FAUJurXi19fyF1BIQUWV1G0ah5PWpoWn99VxB5hoU5kWDhKWlB2EF1OfHufFScsmhqMM",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Kortemark"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 51.1542290,
+               "lng" : 3.2573490
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "f5bf60e5e65905944a820a9707ee9161b1c4377f",
+         "name" : "Station Oostkamp",
+         "reference" : "CnRvAAAAT2-h0gFqoRPsa5Lb1gh6USisbIhJU2seApKh_G0wO597vKNRbc4HiEYx1pWPROoCzdit571NN8jec1S2Q027I-z5n9XRU37kIqtAh2NERI52Tg2VEMX9TJb6vpd6uYsAF7grkO5zNuAjkckM0HFrTxIQcTcS1jH6CWCA-IDgxcGVexoU6AHyP2UxwXfn6ARetpwhWr_E5I8",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Oostkamp"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 51.1265840,
+               "lng" : 3.1638080
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "cfe658b5f620d60356ae64b6dc54509974256520",
+         "name" : "Station Zedelgem",
+         "reference" : "CnRuAAAAYCIzbA3ERQX3-MtwpjtsubPNfcywb4wHpBqIrsV-6cMSndhmjK5amIYXFoknXY-qprhYa5eEqsqbaa2IhyWnd9KgHkhKkGlss2cj_J4uVZXi9KnOc6RuUtcme7JZeWYLe6Hu5Q8EI9DW-VdzgOY8UxIQCwNxsIU7FTvMg6AJZ2vYrhoUwkH6OJjxQwkxu-HFNHEi4LWusN4",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Zedelgem"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 51.064820,
+               "lng" : 3.1055090
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "2a480d8d863a9e1c39c4abad300c58e6f5e235fa",
+         "name" : "Station Torhout",
+         "photos" : [
+            {
+               "height" : 776,
+               "html_attributions" : [ "From a Google User" ],
+               "photo_reference" : "CnRsAAAAblyYsvCRWsstSMMnDNGGs4jWC1SdAu8rNWC_mx4M1yH6fsVbO3_4_TMqeh4fTYzjbu5LeAD7pkLkb3vTLt9cqBa--1lol61tAESguSWLUhZQeSs0jxk2eUl9P51lip1ixRMAfQrsgxlxGi0vg7uDqRIQkBiVhy-juiydu5bcQoT1WxoUjY_4MVUdcysaUZwu04qANs18hLo",
+               "width" : 1296
+            }
+         ],
+         "reference" : "CnRtAAAAyCJvkVfKfHQ6nzAz5c2c5R7JTHGMy38uaUT7rV8XHh3cMzGM34OMchGsJ1OtLAcq_yL34OZhvaQVNp08Kn9aGAlCrM4KzTwLDiRxanM-D_2P_mgg_-6BX1A42b3AK5GdCidReA6DfKsQN_mCoeuVihIQC-Jm5r26IwP6gpFp4KKsZBoUL3ElhpnHEXZoIdGMJpCMVNGjRwk",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Torhout"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 51.025070,
+               "lng" : 3.1274270
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "2ddb3d9f8ca73fc81d1697e1693c9aba37e12f04",
+         "name" : "Station Lichtervelde",
+         "reference" : "CoQBcwAAAEXjZ88p6EL2seD1XdRqsvYoRVjdpCbluyc1U0pFn3_i2xMlvviqijtqydB8yA78J3f_7DQoBzxeEKqZ-TxO42LwKbLVmdHno1g5QtvnuZoP54gfVmFCB23_n9FlTyS1Lr_EK7C_1mqjK8G4e3FZnLu9e6iZ4nuAo-geLbiW73OJEhABbgN85OGXLNEorKgINlxTGhSR9XCv9hocRMNf1u1p2CNGyvAFeA",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Lichtervelde"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 51.1281240,
+               "lng" : 3.3292580
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "98f272d2aee84bd170bd4d1362f0e5bc8a1d1351",
+         "name" : "Station Beernem",
+         "reference" : "CnRuAAAAW2uM0AEsAf68i-MiTA-TSkB8vVZ4LBsajv8X_GBdR8B3KCTT8Qr4BOvFra_2uTSHIMv83Ri4mIErO_Fftpuwz91T5feh9cDOU4shEtshaT3OWHj6nh4vPSLNqjS-mnQRCObyBbZ-6wltteutPKCKLxIQH2dwg4J3_MgXKFog7WIToxoUpaQUhNflIHzQCZAEGTEXyTs8fEI",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Beernem"
+      },
+      {
+         "geometry" : {
+            "location" : {
+               "lat" : 50.9846040,
+               "lng" : 3.4183270
+            }
+         },
+         "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/generic_business-71.png",
+         "id" : "bd4c55028566a99177d290caf2ad945575ba45b9",
+         "name" : "Station Aarsele",
+         "reference" : "CnRtAAAAVUFJBDo1sJy_0aAO33kGw8AYuTsxQW6StrlmZbQVny6SxdNuyuHPXHtw0pqQgpUCDnlA0am2-221GBEORonZDl9gbOIoIhDhWBtYTrgtxXPb7O4Tu-9GpWxL3l81alqQLrvu1pv4Qh2FYNI8O-JeqxIQs0n2etPcKAvtwG19cNHVFRoUbLymzd1v9X7BYasbjxMLiri3zhQ",
+         "types" : [ "train_station", "establishment" ],
+         "vicinity" : "Tielt"
+      }
+   ],
+   "status" : "OK"
+}

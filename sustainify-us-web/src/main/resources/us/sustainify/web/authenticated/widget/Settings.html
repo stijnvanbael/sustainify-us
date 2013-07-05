@@ -1,0 +1,211 @@
+<html>
+<body>
+    <div class="modal hide fade" id="settings" tabindex="-1" role="dialog" aria-labelledby="settingsLabel" aria-hidden="true">
+        <form class="form-horizontal" id="settings-form" action="/authenticated/settings" method="POST" autocomplete="off">
+            <input type="hidden" name="target" value="${target}" />
+            <div class="modal-header">
+            	@ShowIf(preferences.homeLocationName != empty)
+                <button type="button" class="close" data-dismiss="modal">×</button>
+                <h3 id="settingsLabel">Settings</h3>
+            </div>
+            <div class="modal-body">
+                <ul id="settings-tabs" class="nav nav-tabs" data-tabs="tabs">
+                    <li class="active"><a href="#user-settings" data-toggle="tab">User</a></li>
+                    <li><a href="#organisation-settings" data-toggle="tab">Organisation</a></li>
+                </ul>
+                <div id="settings-tabs-content" class="tab-content">
+                    <div class="tab-pane fade in active" id="user-settings">
+                    	@ShowIf(preferences.homeLocationName == empty)
+                    	<div class="alert alert-info">
+						    <strong>Hi there!</strong> Welcome to Sustainify.us! Please enter your preferences.
+		                </div>
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label" for="preferences.homeLocationName">Home Location</label>
+                                <div class="controls">
+                                    <input type="text" id="preferences.homeLocationName" name="preferences.homeLocationName" placeholder="Home Location" value="${preferences.homeLocationName}"
+                                        autocomplete="off" data-provide="typeahead" data-url="/locations" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+	                        <div class="control-group">
+	                            <label class="control-label" for="preferences.workLocation">Work Location</label>
+	                            <div class="controls">
+	                                <select id="preferences.workLocation" name="preferences.workLocation">
+	                                	@Repeat(items=preferences.organisationLocations, var="location")
+	                                	<opt>
+		                                	@ShowIf(location.selected)
+		                                	<option value="${location.id}" selected>${location.name}</option>
+		                                	@ShowIf(!location.selected)
+		                                	<option value="${location.id}">${location.name}</option>
+	                                	</opt>
+	                                </select>
+	                            </div>
+	                        </div>
+	                    </fieldset>
+	                    <fieldset>
+                    		<legend>Office hours</legend>
+                    		<div>Leave empty for days not going to work</div>
+	                    	<div class="control-group">
+	                    		<table>
+	                    			<thead>
+	                    				<tr>
+	                    					<th>Day</th>
+	                    					<th>Arrival</th>
+	                    					<th>Departure</th>
+	                    				</tr>
+	                    			</thead>
+	                    			<tbody>
+	                    				<tr>
+	                    					<td><label for="preferences.officeHours.monday.arrival">Monday</label></td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.monday.arrival" id="preferences.officeHours.monday.arrival"
+	                    							placeholder="Arrival" value="${preferences.officeHours.monday.arrival}" />
+	                    					</td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.monday.departure" id="preferences.officeHours.monday.departure"
+	                    							placeholder="Departure" value="${preferences.officeHours.monday.departure}" />
+	                    					</td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td><label for="preferences.officeHours.tuesday.arrival">Tuesday</label></td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.tuesday.arrival" id="preferences.officeHours.tuesday.arrival"
+	                    							placeholder="Arrival" value="${preferences.officeHours.tuesday.arrival}" />
+	                    					</td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.tuesday.departure" id="preferences.officeHours.tuesday.departure"
+	                    							placeholder="Departure" value="${preferences.officeHours.tuesday.departure}" />
+	                    					</td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td><label for="preferences.officeHours.wednesday.arrival">Wednesday</label></td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.wednesday.arrival" id="preferences.officeHours.wednesday.arrival"
+	                    							placeholder="Arrival" value="${preferences.officeHours.wednesday.arrival}" />
+	                    					</td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.wednesday.departure" id="preferences.officeHours.wednesday.departure"
+	                    							placeholder="Departure" value="${preferences.officeHours.wednesday.departure}" />
+	                    					</td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td><label for="preferences.officeHours.thursday.arrival">Thursday</label></td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.thursday.arrival" id="preferences.officeHours.thursday.arrival"
+	                    							placeholder="Arrival" value="${preferences.officeHours.thursday.arrival}" />
+	                    					</td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.thursday.departure" id="preferences.officeHours.thursday.departure"
+	                    							placeholder="Departure" value="${preferences.officeHours.thursday.departure}" />
+	                    					</td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td><label for="preferences.officeHours.friday.arrival">Friday</label></td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.friday.arrival" id="preferences.officeHours.friday.arrival"
+	                    							placeholder="Arrival" value="${preferences.officeHours.friday.arrival}" />
+	                    					</td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.friday.departure" id="preferences.officeHours.friday.departure"
+	                    							placeholder="Departure" value="${preferences.officeHours.friday.departure}" />
+	                    					</td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td><label for="preferences.officeHours.saturday.arrival">Saturday</label></td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.saturday.arrival" id="preferences.officeHours.saturday.arrival"
+	                    							placeholder="Arrival" value="${preferences.officeHours.saturday.arrival}" />
+	                    					</td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.saturday.departure" id="preferences.officeHours.saturday.departure"
+	                    							placeholder="Departure" value="${preferences.officeHours.saturday.departure}" />
+	                    					</td>
+	                    				</tr>
+	                    				<tr>
+	                    					<td><label for="preferences.officeHours.sunday.arrival">Sunday</label></td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.sunday.arrival" id="preferences.officeHours.sunday.arrival"
+	                    							placeholder="Arrival" value="${preferences.officeHours.sunday.arrival}" />
+	                    					</td>
+	                    					<td>
+	                    						<input type="text" class="input-small" name="preferences.officeHours.sunday.departure" id="preferences.officeHours.sunday.departure"
+	                    							placeholder="Departure" value="${preferences.officeHours.sunday.departure}" />
+	                    					</td>
+	                    				</tr>
+	                    			</tbody>
+	                    		</table>
+	                    	</div>
+	                    </fieldset>
+                    </div>
+                    <div class="tab-pane fade" id="organisation-settings">
+                        <fieldset>
+                            <div class="control-group">
+                                <label class="control-label" for="preferences.organisationName">Name</label>
+                                <div class="controls">
+                                    <input type="text" name="preferences.organisationName" placeholder="Name" value="${preferences.organisationName}" />
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                        	<legend>Locations</legend>
+                            <div class="control-group">
+                            	<table>
+                            		<thead>
+                            			<tr>
+                            				<th>Name</th>
+                            				<th>Address</th>
+                            				<th></th>
+                            		</thead>
+                            		<tbody>
+										@Repeat(items=preferences.organisationLocations, var="organisationLocation")
+                            			<tr id="preferences-organisationLocation-${organisationLocation.id}">
+                            				<td>
+                            					<input type="hidden" name="preferences.organisationLocationIds" value="${organisationLocation.id}" />
+                            					<input type="text" class="input-small" name="preferences.organisationLocationNames" placeholder="Name" value="${organisationLocation.name}" />
+                            				</td>
+                            				<td>
+                            					<input type="text" class="input-xlarge" name="preferences.organisationLocationAddresses" placeholder="Address" value="${organisationLocation.address}"
+                                        			autocomplete="off" data-provide="typeahead" data-url="/locations" />
+                            				</td>
+                            				<td>
+                            					@ShowIf(organisationLocation.index != 0)
+                            					<button class="btn btn-danger" type="button" data-action="delete" data-ref="preferences-organisationLocation-${organisationLocation.id}">Delete</button>
+                            				</td>
+                            			</tr>
+                            			
+                            			<tr id="preferences-organisationLocation-:id" class="hidden">
+                            				<td>
+                            					<input type="hidden" name="preferences.organisationLocationIds" value="" />
+                            					<input type="text" class="input-small" name="preferences.organisationLocationNames" placeholder="Name" value="" />
+                            				</td>
+                            				<td>
+                            					<input type="text" class="input-xlarge" name="preferences.organisationLocationAddresses" placeholder="Address" value=""
+                                        			autocomplete="off" data-provide="typeahead" data-url="/locations" />
+                            				</td>
+                            				<td>
+                            					<button class="btn btn-danger" type="button" data-action="delete" data-ref="preferences-organisationLocation-:id">Delete</button>
+                            				</td>
+                            			</tr>
+                            		</tbody>
+                            	</table>
+                            </div>
+                            <div class="control-group">
+                                <button class="btn btn-primary" type="button" data-action="add" data-ref="preferences-organisationLocation-:id" data-id="uuid()">Add another location</button>
+                            </div>
+                        </fieldset>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+            	@ShowIf(preferences.homeLocationName != empty)
+                <button class="btn" data-dismiss="modal">Cancel</button>
+                @ShowIf(preferences.homeLocationName == empty)
+                <a href="${signOutURL}" class="btn">Cancel</a>
+                <button class="btn btn-primary" type="submit">Save changes</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

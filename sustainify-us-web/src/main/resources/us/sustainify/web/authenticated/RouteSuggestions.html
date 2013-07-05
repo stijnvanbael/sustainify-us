@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Sustainify.us</title>
+<link rel="stylesheet" type="text/css" href="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" />
+<link rel="stylesheet" type="text/css" href="/css/sustainify-us.css" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<script type="text/javascript" src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.10.0/jquery.validate.min.js"></script>
+<script type="text/javascript" src="http://netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx1jPkQQhfRZQBcnd-wusEIJocNcCvGQo&sensor=false"></script>
+<script type="text/javascript" src="/js/sustainify-us.js"></script>
+@ShowIf(preferences.homeLocationName == empty)
+<script type="text/javascript">
+	$(function() {
+		$('#settings').attr('data-backdrop', 'static');
+		$('#settings').attr('data-keyboard', 'false');
+		$('#settings').modal('show');
+	});
+</script>
+</head>
+<body>
+	@Navigation
+    <div></div>
+    
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+            	<div id="notifications"></div>
+            	<form id="workLocationForm" class="form-horizontal" action="/authenticated/default-location" method="POST">
+            		<fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="workLocation">Work Location</label>
+                            <div class="controls">
+                                <select id="workLocation" name="workLocation">
+                                	@Repeat(items=organisationLocations, var="location")
+                                	<opt>
+	                                	@ShowIf(location.selected)
+	                                	<option value="${location.id}" selected>${location.name}</option>
+	                                	@ShowIf(!location.selected)
+	                                	<option value="${location.id}">${location.name}</option>
+                                	</opt>
+                                </select>
+                                <button type="submit" class="btn btn-primary">Set as default</button>
+                            </div>
+                        </div>
+                    </fieldset>
+            	</form>
+            </div>
+            <div class="span7">
+            	@ShowIf(routes == empty)
+            	<div id="routes">
+					<script type="text/javascript">loadRoutes($('#workLocation').val());</script>
+				</div>
+            	@ShowIf(routes != empty)
+            	<div id="routes">
+				    <div class="alert alert-info">
+					    <strong>Good morning!</strong> How did you come to work today?
+	                </div>
+	                <form action="/authenticated/route" method="POST">
+	                	@Routes(routes=routes, chosenRoute=chosenRoute)
+	                    <div class="route"></div>
+	                    <button type="submit" class="btn btn-primary">Confirm</button>
+	                </form>
+                </div>
+            </div>
+            <div class="span5">
+            	<div class="well" id="route-map-container" >
+            		<div id="route-map"></div>
+            	</div>
+            	@CoworkerRoutes(coworkerRoutes=coworkerRoutes)
+            	<div class="coworkerRoute"></div>
+            </div>
+        </div>
+    </div>
+    
+    @Settings
+    <div></div>
+</body>
+</html>

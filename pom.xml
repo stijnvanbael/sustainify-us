@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>us.sustainify</groupId>
+    <artifactId>sustainify-us</artifactId>
+    <version>1.0.0-M7-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>Sustainify.us</name>
+    
+    <properties>
+        <jetty.version>7.6.3.v20120416</jetty.version>
+        <appify-framework.version>0.1.7</appify-framework.version>
+    </properties>
+    
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <configuration>
+                        <source>1.7</source>
+                        <target>1.7</target>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-release-plugin</artifactId>
+                    <configuration>
+                        <tagBase>https://svn-appify.forge.cloudbees.com/sustainify/tags/us/sustainify</tagBase>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <extensions>
+            <extension>
+                <groupId>org.apache.maven.wagon</groupId>
+                <artifactId>wagon-webdav-jackrabbit</artifactId>
+                <version>1.0-beta-7</version>
+            </extension>
+        </extensions>
+    </build>
+    
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>be.appify.framework</groupId>
+                <artifactId>appify-framework-bom</artifactId>
+                <version>${appify-framework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>        
+        </dependencies>
+    </dependencyManagement>
+    <modules>
+        <module>sustainify-us-core</module>
+        <module>sustainify-us-web</module>
+    </modules>
+
+	<repositories>
+		<repository>
+			<id>appify-release</id>
+			<url>https://repository-appify.forge.cloudbees.com/release</url>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>appify-snapshot</id>
+			<url>https://repository-appify.forge.cloudbees.com/snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+
+	<distributionManagement>
+		<repository>
+			<id>appify-release</id>
+			<name>Appify Release Repository</name>
+			<url>dav:https://repository-appify.forge.cloudbees.com/release</url>
+		</repository>
+		<snapshotRepository>
+			<id>appify-snapshot</id>
+			<name>Appify Snapshot repository</name>
+			<url>dav:https://repository-appify.forge.cloudbees.com/snapshot</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+
+	<scm>
+		<developerConnection>scm:svn:https://svn-appify.forge.cloudbees.com/sustainify/trunk/us/sustainify/sustainify-us</developerConnection>
+	</scm>
+</project>

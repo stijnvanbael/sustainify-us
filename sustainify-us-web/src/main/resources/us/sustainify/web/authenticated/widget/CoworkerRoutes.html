@@ -1,0 +1,14 @@
+<html>
+<body>
+	@Repeat(items=coworkerRoutes, var="coworkerRoute")
+	<div class="coworker-route">
+		<p class="route-score">
+			<span class="badge badge-success">+${coworkerRoute.score}</span>
+		</p>
+		<p>
+			<span class="date">${coworkerRoute.day}</span>
+			${coworkerRoute.name} is going to ${coworkerRoute.destination} ${coworkerRoute.travelMode}.
+		</p>
+	</div>
+</body>
+</html>
