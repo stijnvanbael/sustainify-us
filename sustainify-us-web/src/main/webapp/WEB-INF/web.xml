@@ -26,7 +26,8 @@
 	<env-entry>
 		<env-entry-name>EncryptionService/salt</env-entry-name>
 		<env-entry-type>java.lang.String</env-entry-type>
-		<env-entry-value>Encryption salt goes here</env-entry-value>
+        <!-- Encryption salt goes here -->
+		<env-entry-value>sustainify.us</env-entry-value>
 	</env-entry>
 	
 	<!-- TODO: remove API keys here, get them from the DB -->

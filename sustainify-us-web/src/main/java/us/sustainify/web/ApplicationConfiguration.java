@@ -1,33 +1,5 @@
 package us.sustainify.web;
 
-import java.util.Set;
-import java.util.regex.Pattern;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.persistence.EntityManagerFactory;
-
-import org.reflections.Reflections;
-import org.reflections.scanners.ResourcesScanner;
-import org.reflections.util.ClasspathHelper;
-import org.reflections.util.ConfigurationBuilder;
-
-import us.sustainify.common.domain.model.organisation.SustainifyUser;
-import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
-import us.sustainify.commute.domain.model.desirability.WeatherScore;
-import us.sustainify.commute.domain.model.route.TravelMode;
-import us.sustainify.commute.domain.model.score.RouteScore;
-import us.sustainify.commute.domain.repository.PersistentRouteRepository;
-import us.sustainify.commute.domain.repository.PersistentScoredRouteRepository;
-import us.sustainify.commute.domain.repository.ScoredRouteRepository;
-import us.sustainify.commute.domain.service.DefaultRouteChoiceService;
-import us.sustainify.commute.domain.service.DefaultRouteService;
-import us.sustainify.commute.domain.service.DefaultScoreService;
-import us.sustainify.commute.domain.service.RouteChoiceService;
-import us.sustainify.commute.domain.service.RouteService;
-import us.sustainify.commute.domain.service.ScoreService;
-import us.sustainify.commute.domain.service.google.directions.GoogleDirectionsService;
-import us.sustainify.web.filter.AuthenticationFilter;
 import be.appify.framework.cache.Cache;
 import be.appify.framework.cache.simple.HashMapCache;
 import be.appify.framework.common.security.domain.SimpleCredential;
@@ -46,7 +18,6 @@ import be.appify.framework.security.repository.UserRepository;
 import be.appify.framework.security.service.AuthenticationService;
 import be.appify.framework.security.service.EncryptionService;
 import be.appify.framework.weather.service.wunderground.WundergroundWeatherService;
-
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.apache.ApacheHttpTransport;
 import com.google.inject.AbstractModule;
@@ -56,6 +27,27 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import com.google.sitebricks.SitebricksModule;
+import org.reflections.Reflections;
+import org.reflections.scanners.ResourcesScanner;
+import org.reflections.util.ClasspathHelper;
+import org.reflections.util.ConfigurationBuilder;
+import us.sustainify.common.domain.model.organisation.SustainifyUser;
+import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
+import us.sustainify.commute.domain.model.desirability.WeatherScore;
+import us.sustainify.commute.domain.model.route.TravelMode;
+import us.sustainify.commute.domain.model.score.RouteScore;
+import us.sustainify.commute.domain.repository.PersistentRouteRepository;
+import us.sustainify.commute.domain.repository.PersistentScoredRouteRepository;
+import us.sustainify.commute.domain.repository.ScoredRouteRepository;
+import us.sustainify.commute.domain.service.*;
+import us.sustainify.commute.domain.service.google.directions.GoogleDirectionsService;
+import us.sustainify.web.filter.AuthenticationFilter;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.persistence.EntityManagerFactory;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 public class ApplicationConfiguration extends GuiceServletContextListener {
 	private static final Reflections STATIC_REFLECTIONS = new Reflections(new ConfigurationBuilder()
@@ -89,12 +81,12 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 					bind(Persistence.class).toInstance(persistence);
 
 					GoogleLocationService locationService = new GoogleLocationService(new ApacheHttpTransport(),
-							(String) context.lookup("java:comp/env/ejb/GoogleLocationService/key"));
+							(String) context.lookup("java:comp/env/GoogleLocationService/key"));
 					locationService.setRetryCount(5);
 					bind(LocationService.class).toInstance(locationService);
-					UserRepository<SustainifyUser> userRepository = new PersistentUserRepository<SustainifyUser>(persistence, SustainifyUser.class);
+					UserRepository<SustainifyUser> userRepository = new PersistentUserRepository<>(persistence, SustainifyUser.class);
 					Sha1EncryptionService encryptionService = new Sha1EncryptionService(
-							(String) context.lookup("java:comp/env/ejb/EncryptionService/salt"), "UTF-8");
+							(String) context.lookup("java:comp/env/EncryptionService/salt"), "UTF-8");
 
 					bind(new TypeLiteral<UserRepository<SustainifyUser>>() {
 					}).toInstance(userRepository);
@@ -114,7 +106,7 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 					directionsService.setRetryCount(5);
 
 					WundergroundWeatherService weatherService = new WundergroundWeatherService(transport,
-							(String) context.lookup("java:comp/env/ejb/WeatherUnderground/key"));
+							(String) context.lookup("java:comp/env/WeatherUnderground/key"));
 					weatherService.setRetryCount(5);
 					WeatherScore weatherScore = WeatherScore.withService(weatherService).base(100)
 							.subtract(1).perDegreeBelow(Temperature.degreesCelcius(15))
