@@ -31,6 +31,10 @@ public class Organisation extends AbstractEntity {
 	private Organisation() {
 	}
 
+    public static Builder createNew() {
+        return new Builder();
+    }
+
 	public Organisation(String name, OrganisationLocation... locations) {
 		this.name = name;
 		setLocations(Lists.newArrayList(locations));
@@ -75,9 +79,19 @@ public class Organisation extends AbstractEntity {
 			return set("name", name);
 		}
 
-		public Builder location(@NotNull Location location) {
-			return set("location", location);
+		public Builder locations(@NotNull List<OrganisationLocation> locations) {
+			return set("locations", locations);
 		}
-	}
+
+        @Override
+        public Organisation build() {
+            Organisation organisation = super.build();
+            for(OrganisationLocation location : organisation.locations) {
+                location.setOrganisation(organisation);
+                location.setOrder(organisation.locations.indexOf(location));
+            }
+            return organisation;
+        }
+    }
 
 }

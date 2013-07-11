@@ -8,7 +8,7 @@
     
     <properties>
         <jetty.version>7.6.3.v20120416</jetty.version>
-        <appify-framework.version>0.1.7</appify-framework.version>
+        <appify-framework.version>0.1.8-SNAPSHOT</appify-framework.version>
     </properties>
     
     <build>

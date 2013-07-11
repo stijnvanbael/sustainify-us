@@ -17,6 +17,7 @@ import be.appify.framework.security.repository.PersistentUserRepository;
 import be.appify.framework.security.repository.UserRepository;
 import be.appify.framework.security.service.AuthenticationService;
 import be.appify.framework.security.service.EncryptionService;
+import be.appify.framework.weather.service.WeatherService;
 import be.appify.framework.weather.service.wunderground.WundergroundWeatherService;
 import com.google.api.client.http.HttpTransport;
 import com.google.api.client.http.apache.ApacheHttpTransport;
@@ -32,6 +33,9 @@ import org.reflections.scanners.ResourcesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
+import us.sustainify.common.domain.model.system.SystemSettings;
+import us.sustainify.common.domain.repository.system.PersistentSystemSettingsRepository;
+import us.sustainify.common.domain.repository.system.SystemSettingsRepository;
 import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
 import us.sustainify.commute.domain.model.desirability.WeatherScore;
 import us.sustainify.commute.domain.model.route.TravelMode;
@@ -42,6 +46,7 @@ import us.sustainify.commute.domain.repository.ScoredRouteRepository;
 import us.sustainify.commute.domain.service.*;
 import us.sustainify.commute.domain.service.google.directions.GoogleDirectionsService;
 import us.sustainify.web.filter.AuthenticationFilter;
+import us.sustainify.web.filter.SetupFilter;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
@@ -60,6 +65,7 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 			@Override
 			protected void configureServlets() {
 				filter("/authenticated/*").through(AuthenticationFilter.class);
+                filter("/setup").through(SetupFilter.class);
 			}
 		}, new SitebricksModule() {
 			@Override
@@ -80,13 +86,15 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 					Persistence persistence = new JPAPersistence(entityManagerFactory);
 					bind(Persistence.class).toInstance(persistence);
 
-					GoogleLocationService locationService = new GoogleLocationService(new ApacheHttpTransport(),
-							(String) context.lookup("java:comp/env/GoogleLocationService/key"));
+                    SystemSettingsRepository systemSettingsRepository = new PersistentSystemSettingsRepository(persistence);
+                    bind(SystemSettingsRepository.class).toInstance(systemSettingsRepository);
+                    SystemSettings systemSettings = systemSettingsRepository.getSystemSettings();
+
+					GoogleLocationService locationService = new GoogleLocationService(new ApacheHttpTransport(), systemSettings.getGoogleAPIKey());
 					locationService.setRetryCount(5);
 					bind(LocationService.class).toInstance(locationService);
 					UserRepository<SustainifyUser> userRepository = new PersistentUserRepository<>(persistence, SustainifyUser.class);
-					Sha1EncryptionService encryptionService = new Sha1EncryptionService(
-							(String) context.lookup("java:comp/env/EncryptionService/salt"), "UTF-8");
+					Sha1EncryptionService encryptionService = new Sha1EncryptionService((String) context.lookup("java:comp/env/EncryptionService/salt"), "UTF-8");
 
 					bind(new TypeLiteral<UserRepository<SustainifyUser>>() {
 					}).toInstance(userRepository);
@@ -105,8 +113,7 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 					GoogleDirectionsService directionsService = new GoogleDirectionsService(transport, new PersistentRouteRepository(persistence), cache);
 					directionsService.setRetryCount(5);
 
-					WundergroundWeatherService weatherService = new WundergroundWeatherService(transport,
-							(String) context.lookup("java:comp/env/WeatherUnderground/key"));
+					WundergroundWeatherService weatherService = new WundergroundWeatherService(transport, systemSettings.getWundergroundAPIKey());
 					weatherService.setRetryCount(5);
 					WeatherScore weatherScore = WeatherScore.withService(weatherService).base(100)
 							.subtract(1).perDegreeBelow(Temperature.degreesCelcius(15))
@@ -119,6 +126,7 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 							DesirabilityScore.forTravelMode(TravelMode.PUBLIC_TRANSIT).base(80).subtract(1).perMinute(),
 							DesirabilityScore.forTravelMode(TravelMode.CAR).base(40).subtract(1).perMinute());
 					bind(RouteService.class).toInstance(routeService);
+                    bind(WeatherService.class).toInstance(weatherService);
 
 					ScoreService scoreService = new DefaultScoreService(
 							RouteScore.forTravelMode(TravelMode.BICYCLING).perKilometer(10).addWeatherScore(weatherScore),

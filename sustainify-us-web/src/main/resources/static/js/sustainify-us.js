@@ -1,19 +1,22 @@
 var map;
 var colors = [];
-colors[google.maps.TravelMode.BICYCLING] = "#00ff00";
-colors[google.maps.TravelMode.DRIVING] = "#ff0000";
-colors[google.maps.TravelMode.WALKING] = "#00ffff";
-colors[google.maps.TravelMode.TRANSIT] = "#0000ff";
+colors[google.maps.TravelMode.BICYCLING] = '#00ff00';
+colors[google.maps.TravelMode.DRIVING] = '#ff0000';
+colors[google.maps.TravelMode.WALKING] = '#00ffff';
+colors[google.maps.TravelMode.TRANSIT] = '#0000ff';
 
 var renderers = [];
 
 function initializeMap() {
-    var mapOptions = {
-        center : new google.maps.LatLng(0, 0),
-        zoom : 1,
-        mapTypeId : google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById("route-map"), mapOptions);
+    var mapElement = document.getElementById('route-map');
+    if(mapElement) {
+        var mapOptions = {
+            center : new google.maps.LatLng(0, 0),
+            zoom : 1,
+            mapTypeId : google.maps.MapTypeId.ROADMAP
+        };
+        map = new google.maps.Map(mapElement, mapOptions);
+    }
 }
 
 function showRoutes(routes) {
@@ -137,20 +140,25 @@ function success(message) {
     $('#notifications').html('<div class="alert alert-success">' + message + '</div>')
 }
 
-$.validator.addMethod("regex", function(value, element, regexp) {
-    var re = new RegExp(regexp);
-    return this.optional(element) || re.test(value);
-}, "Invalid input.");
-
 $(function() {
+
+    $.validator.addMethod('regex', function(value, element, regexp) {
+        var re = new RegExp(regexp);
+        return this.optional(element) || re.test(value);
+    }, 'Invalid input.');
+
+    $.validator.setDefaults({
+        ignore: []
+    });
+
     initializeMap();
 
     var settingsValidator = $('#settings-form').validate({
         rules : {
-            "preferences-homeLocationName" : {
+            'preferences-homeLocationName' : {
                 required : true
             },
-            "preferences-organisationName" : {
+            'preferences-organisationName' : {
                 required : true
             }
         },
@@ -166,6 +174,52 @@ $(function() {
             error.appendTo(element.closest('.control-group'));
         },
         onkeyup : false
+    });
+
+    var setupValidator = $('#setup-form').validate({
+         rules : {
+             'firstName' : {
+                 required : true
+             },
+             'lastName' : {
+                 required : true
+             },
+             'emailAddress' : {
+                 required : true,
+                 regex : '^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,4})$'
+             },
+             'password' : {
+                 required : true
+             },
+             'passwordRepeat' : {
+                 required : true,
+                 equalTo: '[name="password"]'
+             },
+             'organisationName' : {
+                 required : true
+             },
+             'organisationHQLocation' : {
+                 required : true
+             },
+             'googleAPIKey' : {
+                 required : true
+             },
+             'wundergroundAPIKey' : {
+                 required : true
+             }
+         },
+         highlight : function(label) {
+             var controlGroup = $(label).closest('.control-group');
+             controlGroup.addClass('error');
+         },
+         unhighlight : function(label) {
+             var controlGroup = $(label).closest('.control-group');
+             controlGroup.removeClass('error');
+         },
+         errorPlacement : function(error, element) {
+             error.appendTo(element.closest('.control-group'));
+         },
+         onkeyup : false
     });
 
     attachRouteMapListener();
@@ -221,5 +275,9 @@ $(function() {
             success($('#workLocation option:selected').text() + ' is now your default work location.');
         });
         return false;
+    });
+
+    $('button[data-toggle="tab"]').click(function() {
+        $('a[href="' + $(this).attr('href') + '"][data-toggle="tab"]').tab('show');
     });
 });
