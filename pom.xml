@@ -35,8 +35,8 @@
         <extensions>
             <extension>
                 <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>1.0-beta-7</version>
+                <artifactId>wagon-webdav</artifactId>
+                <version>1.0-beta-2</version>
             </extension>
         </extensions>
     </build>
@@ -94,7 +94,10 @@
 		</snapshotRepository>
 	</distributionManagement>
 
-	<scm>
-		<developerConnection>scm:svn:https://svn-appify.forge.cloudbees.com/sustainify/trunk/us/sustainify/sustainify-us</developerConnection>
-	</scm>
+    <scm>
+        <connection>scm:git:https://github.com/stijnvanbael/sustainify-us.git</connection>
+        <developerConnection>scm:git:https://github.com/stijnvanbael/sustainify-us.git</developerConnection>
+        <url>https://github.com/stijnvanbael/sustainify-us</url>
+        <tag>HEAD</tag>
+    </scm>
 </project>
