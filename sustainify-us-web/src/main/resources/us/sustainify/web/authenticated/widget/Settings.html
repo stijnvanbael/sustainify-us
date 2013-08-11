@@ -21,18 +21,18 @@
 		                </div>
                         <fieldset>
                             <div class="control-group">
-                                <label class="control-label" for="preferences.homeLocationName">Home Location</label>
+                                <label class="control-label" for="preferences-homeLocationName">Home Location</label>
                                 <div class="controls">
-                                    <input type="text" id="preferences.homeLocationName" name="preferences.homeLocationName" placeholder="Home Location" value="${preferences.homeLocationName}"
+                                    <input type="text" id="preferences-homeLocationName" name="preferences.homeLocationName" placeholder="Home Location" value="${preferences.homeLocationName}"
                                         autocomplete="off" data-provide="typeahead" data-url="/locations" />
                                 </div>
                             </div>
                         </fieldset>
                         <fieldset>
 	                        <div class="control-group">
-	                            <label class="control-label" for="preferences.workLocation">Work Location</label>
+	                            <label class="control-label" for="preferences-workLocation">Work Location</label>
 	                            <div class="controls">
-	                                <select id="preferences.workLocation" name="preferences.workLocation">
+	                                <select id="preferences-workLocation" name="preferences.workLocation">
 	                                	@Repeat(items=preferences.organisationLocations, var="location")
 	                                	<opt>
 		                                	@ShowIf(location.selected)
@@ -58,53 +58,53 @@
 	                    			</thead>
 	                    			<tbody>
 	                    				<tr>
-	                    					<td><label for="preferences.officeHours.monday.arrival">Monday</label></td>
+	                    					<td><label for="preferences-officeHours-monday-arrival">Monday</label></td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.monday.arrival" id="preferences.officeHours.monday.arrival"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.monday.arrival" id="preferences-officeHours-monday-arrival"
 	                    							placeholder="Arrival" value="${preferences.officeHours.monday.arrival}" />
 	                    					</td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.monday.departure" id="preferences.officeHours.monday.departure"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.monday.departure" id="preferences-officeHours-monday-departure"
 	                    							placeholder="Departure" value="${preferences.officeHours.monday.departure}" />
 	                    					</td>
 	                    				</tr>
 	                    				<tr>
-	                    					<td><label for="preferences.officeHours.tuesday.arrival">Tuesday</label></td>
+	                    					<td><label for="preferences-officeHours-tuesday-arrival">Tuesday</label></td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.tuesday.arrival" id="preferences.officeHours.tuesday.arrival"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.tuesday.arrival" id="preferences-officeHours-tuesday-arrival"
 	                    							placeholder="Arrival" value="${preferences.officeHours.tuesday.arrival}" />
 	                    					</td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.tuesday.departure" id="preferences.officeHours.tuesday.departure"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.tuesday.departure" id="preferences-officeHours-tuesday-departure"
 	                    							placeholder="Departure" value="${preferences.officeHours.tuesday.departure}" />
 	                    					</td>
 	                    				</tr>
 	                    				<tr>
-	                    					<td><label for="preferences.officeHours.wednesday.arrival">Wednesday</label></td>
+	                    					<td><label for="preferences-officeHours-wednesday-arrival">Wednesday</label></td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.wednesday.arrival" id="preferences.officeHours.wednesday.arrival"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.wednesday.arrival" id="preferences-officeHours-wednesday-arrival"
 	                    							placeholder="Arrival" value="${preferences.officeHours.wednesday.arrival}" />
 	                    					</td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.wednesday.departure" id="preferences.officeHours.wednesday.departure"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.wednesday.departure" id="preferences-officeHours-wednesday-departure"
 	                    							placeholder="Departure" value="${preferences.officeHours.wednesday.departure}" />
 	                    					</td>
 	                    				</tr>
 	                    				<tr>
-	                    					<td><label for="preferences.officeHours.thursday.arrival">Thursday</label></td>
+	                    					<td><label for="preferences-officeHours-thursday-arrival">Thursday</label></td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.thursday.arrival" id="preferences.officeHours.thursday.arrival"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.thursday.arrival" id="preferences-officeHours-thursday-arrival"
 	                    							placeholder="Arrival" value="${preferences.officeHours.thursday.arrival}" />
 	                    					</td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.thursday.departure" id="preferences.officeHours.thursday.departure"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.thursday.departure" id="preferences-officeHours-thursday-departure"
 	                    							placeholder="Departure" value="${preferences.officeHours.thursday.departure}" />
 	                    					</td>
 	                    				</tr>
 	                    				<tr>
-	                    					<td><label for="preferences.officeHours.friday.arrival">Friday</label></td>
+	                    					<td><label for="preferences-officeHours-friday-arrival">Friday</label></td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.friday.arrival" id="preferences.officeHours.friday.arrival"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.friday.arrival" id="preferences-officeHours-friday-arrival"
 	                    							placeholder="Arrival" value="${preferences.officeHours.friday.arrival}" />
 	                    					</td>
 	                    					<td>
@@ -113,24 +113,24 @@
 	                    					</td>
 	                    				</tr>
 	                    				<tr>
-	                    					<td><label for="preferences.officeHours.saturday.arrival">Saturday</label></td>
+	                    					<td><label for="preferences-officeHours-saturday-arrival">Saturday</label></td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.saturday.arrival" id="preferences.officeHours.saturday.arrival"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.saturday.arrival" id="preferences-officeHours-saturday-arrival"
 	                    							placeholder="Arrival" value="${preferences.officeHours.saturday.arrival}" />
 	                    					</td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.saturday.departure" id="preferences.officeHours.saturday.departure"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.saturday.departure" id="preferences-officeHours-saturday-departure"
 	                    							placeholder="Departure" value="${preferences.officeHours.saturday.departure}" />
 	                    					</td>
 	                    				</tr>
 	                    				<tr>
-	                    					<td><label for="preferences.officeHours.sunday.arrival">Sunday</label></td>
+	                    					<td><label for="preferences-officeHours-sunday-arrival">Sunday</label></td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.sunday.arrival" id="preferences.officeHours.sunday.arrival"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.sunday.arrival" id="preferences-officeHours-sunday-arrival"
 	                    							placeholder="Arrival" value="${preferences.officeHours.sunday.arrival}" />
 	                    					</td>
 	                    					<td>
-	                    						<input type="text" class="input-small" name="preferences.officeHours.sunday.departure" id="preferences.officeHours.sunday.departure"
+	                    						<input type="text" class="input-small" name="preferences.officeHours.sunday.departure" id="preferences-officeHours-sunday-departure"
 	                    							placeholder="Departure" value="${preferences.officeHours.sunday.departure}" />
 	                    					</td>
 	                    				</tr>
@@ -144,7 +144,7 @@
                             <div class="control-group">
                                 <label class="control-label" for="preferences.organisationName">Name</label>
                                 <div class="controls">
-                                    <input type="text" name="preferences.organisationName" placeholder="Name" value="${preferences.organisationName}" />
+                                    <input type="text" name="preferences.organisationName" id="preferences.organisationName" placeholder="Name" value="${preferences.organisationName}" />
                                 </div>
                             </div>
                         </fieldset>
@@ -157,6 +157,7 @@
                             				<th>Name</th>
                             				<th>Address</th>
                             				<th></th>
+                                        </tr>
                             		</thead>
                             		<tbody>
 										@Repeat(items=preferences.organisationLocations, var="organisationLocation")

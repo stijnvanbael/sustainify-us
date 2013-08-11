@@ -96,7 +96,7 @@ function showRoutesFor(element) {
         routes.push({
             origin : $(this).attr("data-origin"),
             destination : $(this).attr("data-destination"),
-            arrivalTime : $(this).attr("data-arrival-time"),
+            arrivalTime : $(this).attr("data.arrival-time"),
             travelMode : $(this).attr("data-travel-mode")
         });
     });
@@ -155,11 +155,50 @@ $(function() {
 
     var settingsValidator = $('#settings-form').validate({
         rules : {
-            'preferences-homeLocationName' : {
+            'preferences.homeLocationName' : {
                 required : true
             },
-            'preferences-organisationName' : {
-                required : true
+            'preferences.officeHours.monday.arrival' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.monday.departure' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.tuesday.arrival' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.tuesday.departure' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.wednesday.arrival' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.wednesday.departure' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.thursday.arrival' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.thursday.departure' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.friday.arrival' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.friday.departure' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.saturday.arrival' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.saturday.departure' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.sunday.arrival' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+            },
+            'preferences.officeHours.sunday.departure' : {
+                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
             }
         },
         highlight : function(label) {
