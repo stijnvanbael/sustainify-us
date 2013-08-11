@@ -1,23 +1,31 @@
 package us.sustainify.web.authenticated;
 
-public class OfficeDayViewModel {
-	private String arrival;
-	private String departure;
+import org.apache.commons.lang.StringUtils;
+import org.joda.time.LocalTime;
+import us.sustainify.common.domain.model.organisation.OfficeDay;
 
-	public String getArrival() {
-		return arrival;
+public class OfficeDayViewModel {
+    private final OfficeDay officeDay;
+    private static final String FORMAT = "HH:mm";
+
+    public OfficeDayViewModel(OfficeDay officeDay) {
+        this.officeDay = officeDay;
+    }
+
+    public String getArrival() {
+		return officeDay.getArrival() != null ? officeDay.getArrival().toString(FORMAT) : "";
 	}
 
 	public void setArrival(String arrival) {
-		this.arrival = arrival;
+        officeDay.setArrival(StringUtils.isNotBlank(arrival) ? LocalTime.parse(arrival) : null);
 	}
 
 	public String getDeparture() {
-		return departure;
+        return officeDay.getDeparture() != null ? officeDay.getDeparture().toString(FORMAT) : "";
 	}
 
 	public void setDeparture(String departure) {
-		this.departure = departure;
+        officeDay.setDeparture(StringUtils.isNotBlank(departure) ? LocalTime.parse(departure) : null);
 	}
 
 }

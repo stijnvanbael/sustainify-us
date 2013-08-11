@@ -1,5 +1,11 @@
 package us.sustainify.web.authenticated;
 
+import us.sustainify.common.domain.model.organisation.DayOfWeek;
+import us.sustainify.common.domain.model.organisation.OfficeDay;
+import us.sustainify.common.domain.model.organisation.SustainifyUser;
+
+import java.util.List;
+
 public class OfficeHoursViewModel {
 	private final OfficeDayViewModel monday;
 	private final OfficeDayViewModel tuesday;
@@ -9,17 +15,29 @@ public class OfficeHoursViewModel {
 	private final OfficeDayViewModel saturday;
 	private final OfficeDayViewModel sunday;
 
-	public OfficeHoursViewModel() {
-		monday = new OfficeDayViewModel();
-		tuesday = new OfficeDayViewModel();
-		wednesday = new OfficeDayViewModel();
-		thursday = new OfficeDayViewModel();
-		friday = new OfficeDayViewModel();
-		saturday = new OfficeDayViewModel();
-		sunday = new OfficeDayViewModel();
+	public OfficeHoursViewModel(SustainifyUser user) {
+        List<OfficeDay> officeHours = user.getPreferences().getOfficeHours();
+		monday = new OfficeDayViewModel(getOfficeDay(user, officeHours, DayOfWeek.MONDAY));
+		tuesday = new OfficeDayViewModel(getOfficeDay(user, officeHours, DayOfWeek.TUESDAY));
+		wednesday = new OfficeDayViewModel(getOfficeDay(user, officeHours, DayOfWeek.WEDNESDAY));
+		thursday = new OfficeDayViewModel(getOfficeDay(user, officeHours, DayOfWeek.THURSDAY));
+		friday = new OfficeDayViewModel(getOfficeDay(user, officeHours, DayOfWeek.FRIDAY));
+		saturday = new OfficeDayViewModel(getOfficeDay(user, officeHours, DayOfWeek.SATURDAY));
+		sunday = new OfficeDayViewModel(getOfficeDay(user, officeHours, DayOfWeek.SUNDAY));
 	}
 
-	public OfficeDayViewModel getMonday() {
+    private static OfficeDay getOfficeDay(SustainifyUser user, List<OfficeDay> officeHours, DayOfWeek dayOfWeek) {
+        if(dayOfWeek.ordinal() < officeHours.size()) {
+            return officeHours.get(dayOfWeek.ordinal());
+        }
+        OfficeDay day = new OfficeDay();
+        day.setUser(user);
+        day.setDayOfWeek(dayOfWeek);
+        officeHours.add(day);
+        return day;
+    }
+
+    public OfficeDayViewModel getMonday() {
 		return monday;
 	}
 

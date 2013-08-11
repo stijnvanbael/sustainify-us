@@ -2,14 +2,7 @@ package us.sustainify.common.domain.model.organisation;
 
 import java.util.List;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
-import javax.persistence.Embeddable;
-import javax.persistence.Embedded;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Transient;
+import javax.persistence.*;
 
 import be.appify.framework.location.domain.Location;
 
@@ -29,14 +22,12 @@ public class UserPreferences {
 	@JoinColumn(name = "default_location_id")
 	private OrganisationLocation defaultLocation;
 
-	@Transient
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", orphanRemoval = true)
+    @OrderColumn(name = "day_of_week", nullable = false)
 	private final List<OfficeDay> officeDays;
 
 	public UserPreferences() {
 		officeDays = Lists.newArrayList();
-		for (int i = 0; i < 7; i++) {
-			officeDays.add(new OfficeDay());
-		}
 	}
 
 	public Location getHomeLocation() {
@@ -56,6 +47,6 @@ public class UserPreferences {
 	}
 
 	public List<OfficeDay> getOfficeHours() {
-		return Lists.newArrayList(officeDays);
+		return officeDays;
 	}
 }

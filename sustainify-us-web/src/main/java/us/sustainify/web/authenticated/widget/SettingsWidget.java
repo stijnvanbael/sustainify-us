@@ -20,13 +20,15 @@ public class SettingsWidget {
 	private final SessionContext sessionContext;
 	private final AuthenticationService<SustainifyUser, ?> authenticationService;
 	private final LocationService locationService;
+    private PreferencesViewModel preferences;
 
-	@Inject
+    @Inject
 	public SettingsWidget(SessionContext sessionContext, LocationService locationService,
 			AuthenticationService<SustainifyUser, SimpleCredential<SustainifyUser>> authenticationService) {
 		this.sessionContext = sessionContext;
 		this.locationService = locationService;
 		this.authenticationService = authenticationService;
+        this.preferences = new PreferencesViewModel(sessionContext.getAuthentication().getUser(), locationService);
 	}
 
 	@Inject
@@ -39,7 +41,7 @@ public class SettingsWidget {
 	}
 
 	public PreferencesViewModel getPreferences() {
-		return new PreferencesViewModel(sessionContext.getAuthentication().getUser(), locationService);
+		return preferences;
 	}
 
 	public String getSignOutURL() {

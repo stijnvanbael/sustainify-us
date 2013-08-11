@@ -10,6 +10,7 @@
 		<class>us.sustainify.common.domain.model.organisation.SustainifyUser</class>
 		<class>us.sustainify.common.domain.model.organisation.Organisation</class>
 		<class>us.sustainify.common.domain.model.organisation.OrganisationLocation</class>
+        <class>us.sustainify.common.domain.model.organisation.OfficeDay</class>
 		<class>us.sustainify.commute.domain.model.route.Route</class>
 		<class>us.sustainify.commute.domain.model.route.ScoredRoute</class>
 		<class>be.appify.framework.security.domain.Credential</class>

@@ -50,21 +50,23 @@ public class DefaultRouteService implements RouteService {
 		}
 		Location from = user.getPreferences().getHomeLocation();
 		Location to = destination.getLocation();
-		LocalTime arrivalTime = user.getPreferences().getOfficeHours().get(new DateTime().getDayOfWeek()).getArrival();
-		if (arrivalTime == null) {
-			arrivalTime = new LocalTime();
-		}
-
+        int dayOfWeek = new DateTime().getDayOfWeek() - 1;
+        LocalTime arrivalTime = null;
+        if(dayOfWeek < user.getPreferences().getOfficeHours().size()) {
+            arrivalTime = user.getPreferences().getOfficeHours().get(dayOfWeek).getArrival();
+        }
 		List<Route> routes = Lists.newArrayList();
-		addSimpleRoutes(from, to, routes, arrivalTime);
-		addCombinedRoutes(from, to, routes, arrivalTime);
-		routes = Lists.newArrayList(Collections2.filter(routes, new Predicate<Route>() {
-			@Override
-			public boolean apply(@Nullable Route route) {
-				return route.getDuration().isShorterThan(MAX_DURATION);
-			}
-		}));
-		sortByDesirability(routes);
+		if (arrivalTime != null) {
+            addSimpleRoutes(from, to, routes, arrivalTime);
+            addCombinedRoutes(from, to, routes, arrivalTime);
+            routes = Lists.newArrayList(Collections2.filter(routes, new Predicate<Route>() {
+                @Override
+                public boolean apply(@Nullable Route route) {
+                    return route.getDuration().isShorterThan(MAX_DURATION);
+                }
+            }));
+            sortByDesirability(routes);
+        }
 		return routes;
 	}
 

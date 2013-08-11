@@ -18,10 +18,7 @@ import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
-import us.sustainify.common.domain.model.organisation.OfficeDay;
-import us.sustainify.common.domain.model.organisation.Organisation;
-import us.sustainify.common.domain.model.organisation.OrganisationLocation;
-import us.sustainify.common.domain.model.organisation.SustainifyUser;
+import us.sustainify.common.domain.model.organisation.*;
 import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
 import us.sustainify.commute.domain.model.desirability.WeatherScore;
 import us.sustainify.commute.domain.model.route.Route;
@@ -112,7 +109,13 @@ public abstract class AbstractRouteAcceptanceTests {
 		user = SustainifyUser.createNew().firstName("Sarah").lastName("Graham").organisation(APPIFY).emailAddress("sarah.graham@appify.be")
 				.build();
 		user.getPreferences().setHomeLocation(SOUDERTON);
-		OfficeDay officeDay = user.getPreferences().getOfficeHours().get(TODAY.getStart().getDayOfWeek());
+        for(DayOfWeek dayOfWeek : DayOfWeek.values()) {
+            OfficeDay officeDay = new OfficeDay();
+            officeDay.setDayOfWeek(dayOfWeek);
+            officeDay.setUser(user);
+            user.getPreferences().getOfficeHours().add(officeDay);
+        }
+		OfficeDay officeDay = user.getPreferences().getOfficeHours().get(TODAY.getStart().getDayOfWeek() - 1);
 		officeDay.setArrival(LocalTime.parse("08:00"));
 		officeDay.setDeparture(LocalTime.parse("17:00"));
 

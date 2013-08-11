@@ -1,10 +1,28 @@
 package us.sustainify.common.domain.model.organisation;
 
+import be.appify.framework.domain.AbstractEntity;
+import be.appify.framework.security.domain.User;
+import org.hibernate.annotations.Type;
 import org.joda.time.LocalTime;
 
-public class OfficeDay {
+import javax.persistence.*;
+
+@Entity
+@Table(name = "office_day")
+public class OfficeDay extends AbstractEntity {
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "day_of_week", nullable = false)
+    private DayOfWeek dayOfWeek;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTimeAsTimestamp")
 	private LocalTime arrival;
+
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentLocalTimeAsTimestamp")
 	private LocalTime departure;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "user_id")
+    private User user;
 
 	public LocalTime getArrival() {
 		return arrival;
@@ -22,4 +40,15 @@ public class OfficeDay {
 		this.departure = departure;
 	}
 
+    public DayOfWeek getDayOfWeek() {
+        return dayOfWeek;
+    }
+
+    public void setDayOfWeek(DayOfWeek dayOfWeek) {
+        this.dayOfWeek = dayOfWeek;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 }

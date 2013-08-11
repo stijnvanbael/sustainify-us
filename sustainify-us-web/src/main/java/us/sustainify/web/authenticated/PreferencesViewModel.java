@@ -28,7 +28,7 @@ public class PreferencesViewModel {
 		this.user = user;
 		this.locationService = locationService;
 		this.organisationLocations = Lists.newArrayList();
-		this.officeHours = new OfficeHoursViewModel();
+		this.officeHours = new OfficeHoursViewModel(user);
 		for (OrganisationLocation location : user.getOrganisation().getLocations()) {
 			boolean selected = location.equals(user.getPreferences().getDefaultLocation());
 			organisationLocations.add(new OrganisationLocationViewModel(location, selected));
