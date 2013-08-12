@@ -16,6 +16,7 @@ import org.joda.time.ReadableDuration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import us.sustainify.common.domain.model.organisation.OfficeDay;
 import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
@@ -43,22 +44,17 @@ public class DefaultRouteService implements RouteService {
 		this.desirabilityScores = Sets.newHashSet(desirabilityScores);
 	}
 
-	@Override
-	public List<Route> findRoutesFor(SustainifyUser user, OrganisationLocation destination) {
-		if (user.getPreferences() == null || user.getPreferences().getHomeLocation() == null) {
-			return Collections.emptyList();
-		}
-		Location from = user.getPreferences().getHomeLocation();
-		Location to = destination.getLocation();
-        int dayOfWeek = new DateTime().getDayOfWeek() - 1;
-        LocalTime arrivalTime = null;
-        if(dayOfWeek < user.getPreferences().getOfficeHours().size()) {
-            arrivalTime = user.getPreferences().getOfficeHours().get(dayOfWeek).getArrival();
+    @Override
+    public List<Route> findRoutesFor(SustainifyUser user, OrganisationLocation destination, LocalTime arrival, LocalTime departure) {
+        if (user.getPreferences() == null || user.getPreferences().getHomeLocation() == null) {
+            return Collections.emptyList();
         }
-		List<Route> routes = Lists.newArrayList();
-		if (arrivalTime != null) {
-            addSimpleRoutes(from, to, routes, arrivalTime);
-            addCombinedRoutes(from, to, routes, arrivalTime);
+        Location from = user.getPreferences().getHomeLocation();
+        Location to = destination.getLocation();
+        List<Route> routes = Lists.newArrayList();
+        if (arrival != null) {
+            addSimpleRoutes(from, to, routes, arrival);
+            addCombinedRoutes(from, to, routes, arrival);
             routes = Lists.newArrayList(Collections2.filter(routes, new Predicate<Route>() {
                 @Override
                 public boolean apply(@Nullable Route route) {
@@ -67,10 +63,27 @@ public class DefaultRouteService implements RouteService {
             }));
             sortByDesirability(routes);
         }
-		return routes;
+        return routes;
+    }
+
+	@Override
+	public List<Route> findRoutesFor(SustainifyUser user, OrganisationLocation destination) {
+		if (user.getPreferences() == null || user.getPreferences().getHomeLocation() == null) {
+			return Collections.emptyList();
+		}
+        int dayOfWeek = new DateTime().getDayOfWeek() - 1;
+        LocalTime arrivalTime = null;
+        LocalTime departureTime = null;
+        List<OfficeDay> officeHours = user.getPreferences().getOfficeHours();
+        if(dayOfWeek < officeHours.size()) {
+            OfficeDay officeDay = officeHours.get(dayOfWeek);
+            arrivalTime = officeDay.getArrival();
+            departureTime = officeDay.getDeparture();
+        }
+        return findRoutesFor(user, destination, arrivalTime, departureTime);
 	}
 
-	private void addSimpleRoutes(Location from, Location to, List<Route> routes, LocalTime arrivalTime) {
+    private void addSimpleRoutes(Location from, Location to, List<Route> routes, LocalTime arrivalTime) {
 		for (TravelMode travelMode : TravelMode.values()) {
 			for (Route route : directionsService.findRoutes(from, to, travelMode, arrivalTime)) {
 				routes.add(Route.compose(route).build());

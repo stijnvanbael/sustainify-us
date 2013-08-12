@@ -2,7 +2,9 @@ package us.sustainify.web.authenticated;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,14 +28,17 @@ import com.google.sitebricks.http.Get;
 @Show("Routes.html")
 public class RouteSuggestionsPagePart {
 	private static final Logger LOGGER = LoggerFactory.getLogger(RouteSuggestionsPage.class);
-	private final RouteService routeService;
+
+    private final RouteService routeService;
 	private final SessionContext sessionContext;
 	private final ScoreService scoreService;
 	private boolean error;
 	private final ScoredRouteRepository scoredRouteRepository;
 	private String location;
+    private LocalTime arrival;
+    private LocalTime departure;
 
-	@Inject
+    @Inject
 	public RouteSuggestionsPagePart(RouteService routeService, SessionContext sessionContext, ScoreService scoreService,
 			ScoredRouteRepository scoredRouteRepository) {
 		this.routeService = routeService;
@@ -50,13 +55,21 @@ public class RouteSuggestionsPagePart {
 		this.location = location;
 	}
 
+    public void setArrival(String arrival) {
+        this.arrival = StringUtils.isNotBlank(arrival) ? LocalTime.parse(arrival) : null;
+    }
+
+    public void setDeparture(String departure) {
+        this.departure = StringUtils.isNotBlank(departure) ? LocalTime.parse(departure) : null;
+    }
+
 	@Get
 	public void get() {
 		SustainifyUser user = sessionContext.getAuthentication().getUser();
 		OrganisationLocation destination = findDestination(user);
 		error = false;
 		try {
-			List<Route> routes = routeService.findRoutesFor(user, destination);
+			List<Route> routes = routeService.findRoutesFor(user, destination, arrival, departure);
 			List<ScoredRoute> scoredRoutes = Lists.newArrayList();
 			for (Route route : routes) {
 				scoredRoutes.add(scoreService.scoreFor(route, user));

@@ -5,6 +5,8 @@ colors[google.maps.TravelMode.DRIVING] = '#ff0000';
 colors[google.maps.TravelMode.WALKING] = '#00ffff';
 colors[google.maps.TravelMode.TRANSIT] = '#0000ff';
 
+var TIME_REGEX = '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$';
+
 var renderers = [];
 
 function initializeMap() {
@@ -64,17 +66,23 @@ function requestDirections(route) {
     });
 }
 
-function loadRoutes(location) {
-    $('#routes').html('<h4>Calculating routes, hang on...</h4>' +
-        '<div class="progress progress-striped active">' +
-        '<div class="bar" style="width: 100%;"></div>' +
-        '</div>');
-    $.get("/authenticated/routes", {
-        location : location
-    }, function(html) {
-        $("#routes").html(html);
-        attachRouteMapListener();
-    });
+function loadRoutes() {
+    var form = $('#officeHoursForm');
+    form.validate();
+    if(form.valid()) {
+        $('#routes').html('<h4>Calculating routes, hang on...</h4>' +
+            '<div class="progress progress-striped active">' +
+            '<div class="bar" style="width: 100%;"></div>' +
+            '</div>');
+        $.get("/authenticated/routes", {
+            location : $('#workLocation').val(),
+            arrival : $('#arrival').val(),
+            departure : $('#departure').val()
+        }, function(html) {
+            $('#routes').html(html);
+            attachRouteMapListener();
+        });
+    }
 }
 
 function attachRouteMapListener() {
@@ -159,46 +167,46 @@ $(function() {
                 required : true
             },
             'preferences.officeHours.monday.arrival' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.monday.departure' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.tuesday.arrival' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.tuesday.departure' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.wednesday.arrival' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.wednesday.departure' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.thursday.arrival' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.thursday.departure' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.friday.arrival' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.friday.departure' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.saturday.arrival' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.saturday.departure' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.sunday.arrival' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             },
             'preferences.officeHours.sunday.departure' : {
-                regex : '^([0-9]|0[0-9]|1[0-9]|2[0-3]):[0-5][0-9]$'
+                regex : TIME_REGEX
             }
         },
         highlight : function(label) {
@@ -261,6 +269,30 @@ $(function() {
          onkeyup : false
     });
 
+    // TODO: doesn't work yet
+    $('#officeHoursForm').validate({
+        rules : {
+            'arrival' : {
+                regex : TIME_REGEX
+            },
+            'departure' : {
+                regex : TIME_REGEX
+            }
+        },
+        highlight : function(label) {
+            var controlGroup = $(label).closest('.control-group');
+            controlGroup.addClass('error');
+        },
+        unhighlight : function(label) {
+            var controlGroup = $(label).closest('.control-group');
+            controlGroup.removeClass('error');
+        },
+        errorPlacement : function(error, element) {
+            error.appendTo(element.closest('.control-group'));
+        },
+        onkeyup : false
+    });
+
     attachRouteMapListener();
 
     $('form input, form select').keypress(function(e) {
@@ -304,7 +336,12 @@ $(function() {
     });
     
     $('#workLocation').change(function() {
-        loadRoutes($(this).val());
+        loadRoutes();
+    });
+
+    $('#officeHoursForm').submit(function() {
+        loadRoutes();
+        return false;
     });
     
     $('#workLocationForm').submit(function() {

@@ -128,11 +128,7 @@ label.error {
 	max-width: none;
 }
 
-#workLocationForm label {
+#workLocationForm label, #officeHoursForm label {
 	width: inherit;
 	padding-right: 8px;
-}
-
-#workLocationForm .controls {
-	margin: inherit;
 }

@@ -44,6 +44,20 @@
                             </div>
                         </div>
                     </fieldset>
+                </form>
+                <form id="officeHoursForm" class="form-horizontal" action="/authenticated/routes" method="POST">
+                    <fieldset>
+                        <div class="control-group">
+                            <label class="control-label" for="workLocation">Office hours</label>
+                            <div class="controls">
+                                <input type="text" class="input-small" name="arrival" id="arrival"
+                                       placeholder="Arrival" value="${officeDay.arrival}" />
+                                <input type="text" class="input-small" name="departure" id="departure"
+                                       placeholder="Departure" value="${officeDay.departure}" />
+                                <button type="submit" class="btn btn-primary">Update routes</button>
+                            </div>
+                        </div>
+                    </fieldset>
             	</form>
             </div>
             <div class="span7">

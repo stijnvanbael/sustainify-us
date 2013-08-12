@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.joda.time.LocalDate;
 
+import us.sustainify.common.domain.model.organisation.DayOfWeek;
 import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.commute.domain.model.route.ScoredRoute;
@@ -53,6 +54,11 @@ public class RouteSuggestionsPage extends AbstractAuthenticatedPage {
 		}
 		return organisationLocations;
 	}
+
+    public OfficeDayViewModel getOfficeDay()  {
+        SustainifyUser user = getSessionContext().getAuthentication().getUser();
+        return new OfficeDayViewModel(user.getPreferences().getOfficeHours().get(DayOfWeek.today().ordinal()));
+    }
 
 	public List<ScoredRoute> getCoworkerRoutes() {
 		return coworkerRoutes;
