@@ -209,6 +209,15 @@ $(function() {
             },
             'preferences.officeHours.sunday.departure' : {
                 regex : TIME_REGEX
+            },
+            'preferences.organisationName' : {
+                required : true
+            },
+            'preferences.organisationLocationNames' : {
+                required : true
+            },
+            'preferences.organisationLocationAddresses' : {
+                required : true
             }
         },
         highlight : function(label) {
