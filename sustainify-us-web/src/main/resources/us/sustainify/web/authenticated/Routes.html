@@ -4,9 +4,13 @@
 <div class="alert alert-error">
 	<strong>Whoops!</strong> Something went wrong while getting your routes. The error has been reported and we will fix it as soon as possible.
 </div>
-@ShowIf(routes != empty)
+@ShowIf(routes != empty && !beforeArrival)
 <div class="alert alert-info">
-	<strong>Good morning!</strong> How did you come to work today?
+    <strong>Howdy!</strong> How did you come to work today?
+</div>
+@ShowIf(routes != empty && beforeArrival)
+<div class="alert alert-info">
+    <strong>Good morning!</strong> How will you go to work today?
 </div>
 @ShowIf(routes != empty)
 <form action="/authenticated/route" method="POST">

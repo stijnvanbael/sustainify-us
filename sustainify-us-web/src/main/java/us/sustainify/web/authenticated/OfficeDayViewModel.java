@@ -12,6 +12,12 @@ public class OfficeDayViewModel {
         this.officeDay = officeDay;
     }
 
+    public OfficeDayViewModel(LocalTime arrival, LocalTime departure) {
+        this.officeDay = new OfficeDay();
+        officeDay.setArrival(arrival);
+        officeDay.setDeparture(departure);
+    }
+
     public String getArrival() {
 		return officeDay.getArrival() != null ? officeDay.getArrival().toString(FORMAT) : "";
 	}

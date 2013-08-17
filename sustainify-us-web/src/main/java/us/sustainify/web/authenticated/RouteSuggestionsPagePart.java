@@ -35,8 +35,6 @@ public class RouteSuggestionsPagePart {
 	private boolean error;
 	private final ScoredRouteRepository scoredRouteRepository;
 	private String location;
-    private LocalTime arrival;
-    private LocalTime departure;
 
     @Inject
 	public RouteSuggestionsPagePart(RouteService routeService, SessionContext sessionContext, ScoreService scoreService,
@@ -51,16 +49,21 @@ public class RouteSuggestionsPagePart {
 		return error;
 	}
 
+    public boolean isBeforeArrival() {
+        LocalTime now = LocalTime.now();
+        return now.isBefore(sessionContext.getArrival());
+    }
+
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
     public void setArrival(String arrival) {
-        this.arrival = StringUtils.isNotBlank(arrival) ? LocalTime.parse(arrival) : null;
+        this.sessionContext.setArrival(StringUtils.isNotBlank(arrival) ? LocalTime.parse(arrival) : null);
     }
 
     public void setDeparture(String departure) {
-        this.departure = StringUtils.isNotBlank(departure) ? LocalTime.parse(departure) : null;
+        this.sessionContext.setDeparture(StringUtils.isNotBlank(departure) ? LocalTime.parse(departure) : null);
     }
 
 	@Get
@@ -69,7 +72,7 @@ public class RouteSuggestionsPagePart {
 		OrganisationLocation destination = findDestination(user);
 		error = false;
 		try {
-			List<Route> routes = routeService.findRoutesFor(user, destination, arrival, departure);
+			List<Route> routes = routeService.findRoutesFor(user, destination, sessionContext.getArrival(), sessionContext.getDeparture());
 			List<ScoredRoute> scoredRoutes = Lists.newArrayList();
 			for (Route route : routes) {
 				scoredRoutes.add(scoreService.scoreFor(route, user));

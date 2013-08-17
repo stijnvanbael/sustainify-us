@@ -6,6 +6,7 @@ import javax.inject.Inject;
 
 import org.joda.time.LocalDate;
 
+import org.joda.time.LocalTime;
 import us.sustainify.common.domain.model.organisation.DayOfWeek;
 import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
@@ -41,6 +42,11 @@ public class RouteSuggestionsPage extends AbstractAuthenticatedPage {
 		coworkerRoutes = scoredRouteRepository.findRecentRoutesByOrganisation(user.getOrganisation(), 20);
 	}
 
+    public boolean isBeforeArrival() {
+        LocalTime now = LocalTime.now();
+        return now.isBefore(getSessionContext().getArrival());
+    }
+
 	public List<ScoredRoute> getRoutes() {
 		return getSessionContext().getRoutes();
 	}
@@ -57,6 +63,9 @@ public class RouteSuggestionsPage extends AbstractAuthenticatedPage {
 
     public OfficeDayViewModel getOfficeDay()  {
         SustainifyUser user = getSessionContext().getAuthentication().getUser();
+        if(getSessionContext().isTimesOverridden()) {
+            return new OfficeDayViewModel(getSessionContext().getArrival(), getSessionContext().getDeparture());
+        }
         return new OfficeDayViewModel(user.getPreferences().getOfficeHours().get(DayOfWeek.today().ordinal()));
     }
 
@@ -68,5 +77,9 @@ public class RouteSuggestionsPage extends AbstractAuthenticatedPage {
 		User user = getSessionContext().getAuthentication().getUser();
 		return scoredRouteRepository.findRouteByUserAndDay(user, LocalDate.now());
 	}
+
+    public String getDestination() {
+        return getSessionContext().getSelectedLocation().getName();
+    }
 
 }

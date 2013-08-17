@@ -3,6 +3,7 @@ package us.sustainify.web;
 import java.io.Serializable;
 import java.util.List;
 
+import org.joda.time.LocalTime;
 import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.commute.domain.model.route.ScoredRoute;
@@ -16,6 +17,9 @@ public class SessionContext implements Serializable {
 	private Authentication<SustainifyUser> authentication;
 	private List<ScoredRoute> routes;
 	private OrganisationLocation selectedLocation;
+    private LocalTime arrival;
+    private LocalTime departure;
+    private boolean timesOverridden;
 
 	public void setAuthentication(Authentication<SustainifyUser> authentication) {
 		this.authentication = authentication;
@@ -46,4 +50,26 @@ public class SessionContext implements Serializable {
 	public OrganisationLocation getSelectedLocation() {
 		return selectedLocation;
 	}
+
+    public LocalTime getArrival() {
+        return arrival;
+    }
+
+    public void setArrival(LocalTime arrival) {
+        this.arrival = arrival;
+        timesOverridden = true;
+    }
+
+    public LocalTime getDeparture() {
+        return departure;
+    }
+
+    public void setDeparture(LocalTime departure) {
+        this.departure = departure;
+        timesOverridden = true;
+    }
+
+    public boolean isTimesOverridden() {
+        return timesOverridden;
+    }
 }

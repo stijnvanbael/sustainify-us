@@ -67,7 +67,7 @@ function requestDirections(route) {
 }
 
 function loadRoutes() {
-    var form = $('#officeHoursForm');
+    var form = $('#office-hours-form');
     form.validate();
     if(form.valid()) {
         $('#routes').html('<h4>Calculating routes, hang on...</h4>' +
@@ -340,12 +340,12 @@ $(function() {
         loadRoutes();
     });
 
-    $('#officeHoursForm').submit(function() {
+    $('#office-hours-form').submit(function() {
         loadRoutes();
         return false;
     });
     
-    $('#workLocationForm').submit(function() {
+    $('#work-location-form').submit(function() {
         $.post($(this).attr("action"), {
             workLocation : $('#workLocation').val()
         }, function() {

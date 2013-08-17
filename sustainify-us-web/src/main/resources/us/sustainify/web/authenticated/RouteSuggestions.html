@@ -67,11 +67,17 @@
 				</div>
             	@ShowIf(routes != empty)
             	<div id="routes">
-				    <div class="alert alert-info">
-					    <strong>Good morning!</strong> How did you come to work today?
-	                </div>
-	                <form action="/authenticated/route" method="POST">
-	                	@Routes(routes=routes, chosenRoute=chosenRoute)
+                    @ShowIf(!beforeArrival)
+                    <div class="alert alert-info">
+                        <strong>Howdy!</strong> How did you come to work today?
+                    </div>
+                    @ShowIf(beforeArrival)
+                    <div class="alert alert-info">
+                        <strong>Good morning!</strong> How will you go to work today?
+                    </div>
+
+                    <form action="/authenticated/route" method="POST">
+	                	@Routes(routes=routes, chosenRoute=chosenRoute, destination=destination)
 	                    <div class="route"></div>
 	                    <button type="submit" class="btn btn-primary">Confirm</button>
 	                </form>
