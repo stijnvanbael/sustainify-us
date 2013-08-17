@@ -26,7 +26,7 @@
         <div class="row">
             <div class="span12">
             	<div id="notifications"></div>
-            	<form id="workLocationForm" class="form-horizontal" action="/authenticated/default-location" method="POST">
+            	<form id="work-location-form" class="form-horizontal" action="/authenticated/default-location" method="POST">
             		<fieldset>
                         <div class="control-group">
                             <label class="control-label" for="workLocation">Work Location</label>
@@ -45,10 +45,10 @@
                         </div>
                     </fieldset>
                 </form>
-                <form id="officeHoursForm" class="form-horizontal" action="/authenticated/routes" method="POST">
+                <form id="office-hours-form" class="form-horizontal" action="/authenticated/routes" method="POST">
                     <fieldset>
                         <div class="control-group">
-                            <label class="control-label" for="workLocation">Office hours</label>
+                            <label class="control-label" for="arrival">Office hours</label>
                             <div class="controls">
                                 <input type="text" class="input-small" name="arrival" id="arrival"
                                        placeholder="Arrival" value="${officeDay.arrival}" />

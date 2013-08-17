@@ -81,6 +81,8 @@ function loadRoutes() {
         }, function(html) {
             $('#routes').html(html);
             attachRouteMapListener();
+        }).fail(function() {
+            $('#routes').html('<div class="alert alert-error"><strong>Whoops!</strong> Something went wrong while getting your routes. The error has been reported and we will fix it as soon as possible.</div>')
         });
     }
 }
@@ -269,8 +271,7 @@ $(function() {
          onkeyup : false
     });
 
-    // TODO: doesn't work yet
-    $('#officeHoursForm').validate({
+    $('#office-hours-form').validate({
         rules : {
             'arrival' : {
                 regex : TIME_REGEX
