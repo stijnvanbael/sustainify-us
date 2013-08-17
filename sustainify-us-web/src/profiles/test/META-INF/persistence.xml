@@ -18,6 +18,7 @@
         <class>be.appify.framework.security.domain.User</class>
         <class>be.appify.framework.security.domain.Authentication</class>
 		<properties>
+            <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
             <property name="hibernate.connection.provider_class" value="org.hibernate.connection.C3P0ConnectionProvider" />
             <property name="hibernate.c3p0.min_size" value="0"/>
