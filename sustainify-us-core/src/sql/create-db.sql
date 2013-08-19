@@ -7,7 +7,8 @@ CREATE TABLE user (
 	type VARCHAR(25) NOT NULL,
 	home_location_name VARCHAR(100),
 	home_location_latitude NUMERIC(12,9),
-	home_location_longitude NUMERIC(12,9)
+	home_location_longitude NUMERIC(12,9),
+	default_location_id varchar(100)
 );
 
 CREATE TABLE credential (
@@ -35,7 +36,8 @@ CREATE TABLE organisation_location (
 	name VARCHAR(100) NOT NULL,
 	address VARCHAR(250) NOT NULL,
 	longitude NUMERIC(12,9) NOT NULL,
-	latitude NUMERIC(12,9) NOT NULL
+	latitude NUMERIC(12,9) NOT NULL,
+	sort_order NUMERIC(10,0) NOT NULL
 );
 
 CREATE TABLE route (
@@ -61,7 +63,8 @@ CREATE TABLE scored_route (
 	id VARCHAR(100) NOT NULL,
 	route_id VARCHAR(100) NOT NULL,
 	user_id VARCHAR(100) NOT NULL,
-	`day` DATE
+	`day` DATE NOT NULL,
+	score NUMERIC(10,0) NOT NULL
 );
 
 CREATE TABLE office_day (
@@ -70,6 +73,12 @@ CREATE TABLE office_day (
 	arrival DATETIME,
 	departure DATETIME,
 	user_id VARCHAR(100)
+);
+
+CREATE TABLE system_settings (
+	id VARCHAR(100) NOT NULL,
+	google_api_key VARCHAR(100),
+	wunderground_api_key VARCHAR(100)
 );
 
 
@@ -83,8 +92,10 @@ ALTER TABLE route ADD CONSTRAINT route_PK PRIMARY KEY (id);
 ALTER TABLE scored_route ADD CONSTRAINT scored_route_PK PRIMARY KEY (id);
 ALTER TABLE office_day ADD CONSTRAINT office_day_PK PRIMARY KEY (id);
 ALTER TABLE office_day ADD CONSTRAINT office_day_UK UNIQUE KEY (day_of_week,user_id);
+ALTER TABLE .system_settings ADD CONSTRAINT system_settings_PK PRIMARY KEY (id);
 
 ALTER TABLE user ADD CONSTRAINT user_organisation_FK FOREIGN KEY (organisation_id) REFERENCES organisation(id);
+ALTER TABLE user ADD CONSTRAINT user_organisation_location_FK FOREIGN KEY (default_location_id) REFERENCES organisation_location(id);
 ALTER TABLE credential ADD CONSTRAINT credential_user_FK FOREIGN KEY (user_id) REFERENCES user(id);
 ALTER TABLE authentication ADD CONSTRAINT authentication_user_FK FOREIGN KEY (user_id) REFERENCES user(id);
 ALTER TABLE organisation_location ADD CONSTRAINT organisation_location_organisation_FK FOREIGN KEY (organisation_id) REFERENCES organisation(id);

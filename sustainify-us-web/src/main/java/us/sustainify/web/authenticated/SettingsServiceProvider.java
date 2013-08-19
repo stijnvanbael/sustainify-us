@@ -2,6 +2,8 @@ package us.sustainify.web.authenticated;
 
 import javax.inject.Inject;
 
+import us.sustainify.common.domain.model.organisation.DayOfWeek;
+import us.sustainify.common.domain.model.organisation.OfficeDay;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.web.SessionContext;
 import be.appify.framework.common.security.domain.SimpleCredential;
@@ -38,6 +40,9 @@ public class SettingsServiceProvider extends AbstractAuthenticatedPage {
 	public Reply<?> saveSettings() {
 		SustainifyUser user = getSessionContext().getAuthentication().getUser();
 		getSessionContext().setRoutes(null);
+        OfficeDay officeDay = user.getPreferences().getOfficeHours().get(DayOfWeek.today().ordinal());
+        getSessionContext().setArrival(officeDay.getArrival());
+        getSessionContext().setDeparture(officeDay.getDeparture());
 		userRepository.store(user);
 		return Reply.saying().redirect(target);
 	}
