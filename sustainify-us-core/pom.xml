@@ -3,7 +3,7 @@
     <parent>
         <artifactId>sustainify-us</artifactId>
         <groupId>us.sustainify</groupId>
-        <version>1.0.0-M7-SNAPSHOT</version>
+        <version>1.0.0-M7</version>
         <relativePath>..</relativePath>
     </parent>
     <artifactId>sustainify-us-core</artifactId>
