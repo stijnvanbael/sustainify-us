@@ -19,7 +19,7 @@ public abstract class RouteScore {
 
 		@Override
 		protected int forRouteInternal(Route route) {
-			return routeScore.forRoute(route) * (100 / weatherScore.scoreFor(route.getOrigin()));
+			return (int) (routeScore.forRoute(route) * (100d / weatherScore.scoreFor(route.getOrigin())));
 		}
 
 	}

@@ -69,13 +69,14 @@ public abstract class WeatherScore {
 			List<WeatherCondition> conditions = weatherService.getDailyForecastFor(location);
 			WeatherCondition currentCondition = findCurrentCondition(conditions);
 			if (currentCondition == null) {
-				return 0;
+				return 100;
 			}
-			return getScoreInternal(currentCondition);
+            int score = getScoreInternal(currentCondition);
+            return score < 1 ? 1 : score;
 		} catch (Exception e) {
 			LOGGER.warn("Unable to determine weather score for " + location, e);
 		}
-		return 0;
+		return 100;
 	}
 
 	protected abstract int getScoreInternal(WeatherCondition currentCondition);

@@ -118,7 +118,7 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 					WeatherScore weatherScore = WeatherScore.withService(weatherService).base(100)
 							.subtract(1).perDegreeBelow(Temperature.degreesCelcius(15))
 							.subtract(1).perDegreeAbove(Temperature.degreesCelcius(25))
-							.subtract(10).perMillimeterPrecipitation()
+							.subtract(3).perMillimeterPrecipitation()
 							.subtract(1).perKilometerPerHourWindSpeedAbove(Speed.kilometersPerHour(10));
 					RouteService routeService = new DefaultRouteService(directionsService,
 							DesirabilityScore.forTravelMode(TravelMode.BICYCLING).base(0).subtract(1).perMinute().addWeatherScore(weatherScore),
