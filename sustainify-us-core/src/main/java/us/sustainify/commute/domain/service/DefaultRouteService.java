@@ -19,6 +19,7 @@ import org.slf4j.LoggerFactory;
 import us.sustainify.common.domain.model.organisation.OfficeDay;
 import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
+import us.sustainify.common.domain.service.system.TimestampService;
 import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
 import us.sustainify.commute.domain.model.route.Route;
 import us.sustainify.commute.domain.model.route.TravelMode;
@@ -36,12 +37,14 @@ public class DefaultRouteService implements RouteService {
 
 	protected static final ReadableDuration MAX_DURATION = Duration.standardMinutes(150);
 	private final DirectionsService directionsService;
-	private final Set<DesirabilityScore> desirabilityScores;
+    private final TimestampService timestampService;
+    private final Set<DesirabilityScore> desirabilityScores;
 	private final Logger LOGGER = LoggerFactory.getLogger(DefaultRouteService.class);
 
-	public DefaultRouteService(DirectionsService directionsService, DesirabilityScore... desirabilityScores) {
+	public DefaultRouteService(DirectionsService directionsService, TimestampService timestampService, DesirabilityScore... desirabilityScores) {
 		this.directionsService = directionsService;
-		this.desirabilityScores = Sets.newHashSet(desirabilityScores);
+        this.timestampService = timestampService;
+        this.desirabilityScores = Sets.newHashSet(desirabilityScores);
 	}
 
     @Override
@@ -71,7 +74,7 @@ public class DefaultRouteService implements RouteService {
 		if (user.getPreferences() == null || user.getPreferences().getHomeLocation() == null) {
 			return Collections.emptyList();
 		}
-        int dayOfWeek = new DateTime().getDayOfWeek() - 1;
+        int dayOfWeek = timestampService.getCurrentTimestamp().getDayOfWeek() - 1;
         LocalTime arrivalTime = null;
         LocalTime departureTime = null;
         List<OfficeDay> officeHours = user.getPreferences().getOfficeHours();

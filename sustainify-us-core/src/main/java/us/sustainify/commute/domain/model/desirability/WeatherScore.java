@@ -2,17 +2,23 @@ package us.sustainify.commute.domain.model.desirability;
 
 import java.util.List;
 
+import org.joda.time.Instant;
 import org.slf4j.*;
 
 import be.appify.framework.location.domain.Location;
 import be.appify.framework.quantity.*;
 import be.appify.framework.weather.domain.WeatherCondition;
 import be.appify.framework.weather.service.WeatherService;
+import us.sustainify.common.domain.service.system.TimestampService;
 
 public abstract class WeatherScore {
 	private static final Logger LOGGER = LoggerFactory.getLogger(WeatherScore.class);
 
-	public static class SubtractBuilder {
+    public TimestampService getTimestampService() {
+        return timestampService;
+    }
+
+    public static class SubtractBuilder {
 
 		private final int score;
 		private final WeatherScore weatherScore;
@@ -41,25 +47,29 @@ public abstract class WeatherScore {
 	}
 
 	private final WeatherService weatherService;
+    private final TimestampService timestampService;
 
-	public WeatherScore(WeatherService weatherService) {
+    public WeatherScore(WeatherService weatherService, TimestampService timestampService) {
 		this.weatherService = weatherService;
-	}
+        this.timestampService = timestampService;
+    }
 
-	public static Builder withService(WeatherService weatherService) {
-		return new Builder(weatherService);
+	public static Builder withServices(WeatherService weatherService, TimestampService timestampService) {
+		return new Builder(weatherService, timestampService);
 	}
 
 	public static class Builder {
 
 		private final WeatherService weatherService;
+        private TimestampService timestampService;
 
-		public Builder(WeatherService weatherService) {
+        public Builder(WeatherService weatherService, TimestampService timestampService) {
 			this.weatherService = weatherService;
-		}
+            this.timestampService = timestampService;
+        }
 
 		public WeatherScore base(int score) {
-			return new FixedWeatherScore(weatherService, score);
+			return new FixedWeatherScore(weatherService, timestampService, score);
 		}
 
 	}
@@ -83,7 +93,7 @@ public abstract class WeatherScore {
 
 	private WeatherCondition findCurrentCondition(List<WeatherCondition> conditions) {
 		for (WeatherCondition condition : conditions) {
-			if (condition.getValidity().containsNow()) {
+			if (condition.getValidity().contains(timestampService.getCurrentTimestamp().toDateTime())) {
 				return condition;
 			}
 		}

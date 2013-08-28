@@ -7,6 +7,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import us.sustainify.common.domain.model.organisation.DayOfWeek;
 import us.sustainify.common.domain.model.organisation.OfficeDay;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.commute.domain.model.route.Route;
@@ -27,12 +28,18 @@ public class LeaderboardAcceptanceTests extends AbstractRouteAcceptanceTests {
 				.build();
 		john = SustainifyUser.createNew().firstName("John").lastName("Doe").organisation(APPIFY).emailAddress("john.doe@appify.be")
 				.build();
-		sarah.getPreferences().setHomeLocation(SOUDERTON);
-		john.getPreferences().setHomeLocation(SOUDERTON);
-		OfficeDay officeDay = sarah.getPreferences().getOfficeHours().get(TODAY.getStart().getDayOfWeek());
+        sarah.getPreferences().setHomeLocation(SOUDERTON);
+        john.getPreferences().setHomeLocation(SOUDERTON);
+        for(DayOfWeek dayOfWeek : DayOfWeek.values()) {
+            sarah.getPreferences().getOfficeHours().add(new OfficeDay(sarah, dayOfWeek, null, null));
+        }
+        for(DayOfWeek dayOfWeek : DayOfWeek.values()) {
+            john.getPreferences().getOfficeHours().add(new OfficeDay(john, dayOfWeek, null, null));
+        }
+        OfficeDay officeDay = sarah.getPreferences().getOfficeHours().get(TODAY.getStart().getDayOfWeek() - 1);
 		officeDay.setArrival(LocalTime.parse("08:00"));
 		officeDay.setDeparture(LocalTime.parse("17:00"));
-		officeDay = john.getPreferences().getOfficeHours().get(TODAY.getStart().getDayOfWeek());
+		officeDay = john.getPreferences().getOfficeHours().get(TODAY.getStart().getDayOfWeek() - 1);
 		officeDay.setArrival(LocalTime.parse("08:00"));
 		officeDay.setDeparture(LocalTime.parse("17:00"));
 	}

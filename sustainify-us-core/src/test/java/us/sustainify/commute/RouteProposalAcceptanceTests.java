@@ -57,7 +57,7 @@ public class RouteProposalAcceptanceTests extends AbstractRouteAcceptanceTests {
 		routes(walking, byBicycle, byPublicTransit, byCar);
 		weather(RAINY);
 
-		expectRoutes(byPublicTransit, byCar, byBicycle, walking);
+		expectRoutes(byPublicTransit, byBicycle, byCar, walking);
 	}
 
 	@Test

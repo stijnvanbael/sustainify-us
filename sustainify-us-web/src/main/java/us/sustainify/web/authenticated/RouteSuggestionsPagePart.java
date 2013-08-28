@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 
 import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
+import us.sustainify.common.domain.service.system.TimestampService;
 import us.sustainify.commute.domain.model.route.Route;
 import us.sustainify.commute.domain.model.route.ScoredRoute;
 import us.sustainify.commute.domain.repository.ScoredRouteRepository;
@@ -34,23 +35,25 @@ public class RouteSuggestionsPagePart {
 	private final ScoreService scoreService;
 	private boolean error;
 	private final ScoredRouteRepository scoredRouteRepository;
-	private String location;
+    private final TimestampService timestampService;
+    private String location;
 
     @Inject
 	public RouteSuggestionsPagePart(RouteService routeService, SessionContext sessionContext, ScoreService scoreService,
-			ScoredRouteRepository scoredRouteRepository) {
+			ScoredRouteRepository scoredRouteRepository, TimestampService timestampService) {
 		this.routeService = routeService;
 		this.sessionContext = sessionContext;
 		this.scoreService = scoreService;
 		this.scoredRouteRepository = scoredRouteRepository;
-	}
+        this.timestampService = timestampService;
+    }
 
 	public boolean isError() {
 		return error;
 	}
 
     public boolean isBeforeArrival() {
-        LocalTime now = LocalTime.now();
+        LocalTime now = timestampService.getCurrentTime();
         return now.isBefore(sessionContext.getArrival());
     }
 
@@ -105,6 +108,6 @@ public class RouteSuggestionsPagePart {
 
 	public ScoredRoute getChosenRoute() {
 		User user = sessionContext.getAuthentication().getUser();
-		return scoredRouteRepository.findRouteByUserAndDay(user, LocalDate.now());
+		return scoredRouteRepository.findRouteByUserAndDay(user, timestampService.getCurrentDate());
 	}
 }

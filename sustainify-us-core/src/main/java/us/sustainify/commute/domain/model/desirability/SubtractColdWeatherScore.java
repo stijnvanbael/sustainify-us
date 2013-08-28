@@ -10,7 +10,7 @@ public class SubtractColdWeatherScore extends WeatherScore {
 	private final int score;
 
 	public SubtractColdWeatherScore(WeatherScore weatherScore, int score, Temperature temperature) {
-		super(weatherScore.getWeatherService());
+		super(weatherScore.getWeatherService(), weatherScore.getTimestampService());
 		this.weatherScore = weatherScore;
 		this.score = score;
 		this.temperature = temperature;

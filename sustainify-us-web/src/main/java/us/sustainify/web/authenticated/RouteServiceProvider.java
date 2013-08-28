@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.joda.time.LocalDate;
 
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
+import us.sustainify.common.domain.service.system.TimestampService;
 import us.sustainify.commute.domain.model.route.ScoredRoute;
 import us.sustainify.commute.domain.repository.ScoredRouteRepository;
 import us.sustainify.web.SessionContext;
@@ -26,14 +27,15 @@ public class RouteServiceProvider extends AbstractAuthenticatedPage {
 
 	private int routeIndex;
 	private final ScoredRouteRepository scoredRouteRepository;
+    private final TimestampService timestampService;
 
-	@Inject
+    @Inject
 	public RouteServiceProvider(SessionContext sessionContext, AuthenticationService<SustainifyUser, SimpleCredential<SustainifyUser>> authenticationService,
-			LocationService locationService,
-			ScoredRouteRepository scoredRouteRepository) {
+			LocationService locationService, ScoredRouteRepository scoredRouteRepository, TimestampService timestampService) {
 		super(sessionContext, authenticationService, locationService);
 		this.scoredRouteRepository = scoredRouteRepository;
-	}
+        this.timestampService = timestampService;
+    }
 
 	public void setRouteIndex(int routeIndex) {
 		this.routeIndex = routeIndex;
@@ -44,7 +46,7 @@ public class RouteServiceProvider extends AbstractAuthenticatedPage {
 		List<ScoredRoute> routes = getSessionContext().getRoutes();
 		if (routes != null && routes.size() > routeIndex) {
 			User user = getSessionContext().getAuthentication().getUser();
-			ScoredRoute previousRoute = scoredRouteRepository.findRouteByUserAndDay(user, LocalDate.now());
+			ScoredRoute previousRoute = scoredRouteRepository.findRouteByUserAndDay(user, timestampService.getCurrentDate());
 			if (previousRoute != null) {
 				scoredRouteRepository.delete(previousRoute);
 			}

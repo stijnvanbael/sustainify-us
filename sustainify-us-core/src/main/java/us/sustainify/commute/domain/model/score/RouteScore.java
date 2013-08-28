@@ -6,12 +6,12 @@ import us.sustainify.commute.domain.model.route.TravelMode;
 
 public abstract class RouteScore {
 
-	public class AddWeatherRouteScore extends RouteScore {
+	public class MultiplyByWeatherRouteScore extends RouteScore {
 
 		private final RouteScore routeScore;
 		private final WeatherScore weatherScore;
 
-		public AddWeatherRouteScore(RouteScore routeScore, WeatherScore weatherScore) {
+		public MultiplyByWeatherRouteScore(RouteScore routeScore, WeatherScore weatherScore) {
 			super(routeScore.travelMode);
 			this.routeScore = routeScore;
 			this.weatherScore = weatherScore;
@@ -72,6 +72,6 @@ public abstract class RouteScore {
 	}
 
 	public RouteScore addWeatherScore(WeatherScore weatherScore) {
-		return new AddWeatherRouteScore(this, weatherScore);
+		return new MultiplyByWeatherRouteScore(this, weatherScore);
 	}
 }

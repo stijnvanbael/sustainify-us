@@ -28,6 +28,7 @@ import com.google.inject.TypeLiteral;
 import com.google.inject.servlet.GuiceServletContextListener;
 import com.google.inject.servlet.ServletModule;
 import com.google.sitebricks.SitebricksModule;
+import org.joda.time.DateTimeZone;
 import org.reflections.Reflections;
 import org.reflections.scanners.ResourcesScanner;
 import org.reflections.util.ClasspathHelper;
@@ -36,6 +37,8 @@ import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.common.domain.model.system.SystemSettings;
 import us.sustainify.common.domain.repository.system.PersistentSystemSettingsRepository;
 import us.sustainify.common.domain.repository.system.SystemSettingsRepository;
+import us.sustainify.common.domain.service.system.TimestampService;
+import us.sustainify.common.domain.service.system.TimezoneTimestampService;
 import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
 import us.sustainify.commute.domain.model.desirability.WeatherScore;
 import us.sustainify.commute.domain.model.route.TravelMode;
@@ -86,6 +89,9 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 					Persistence persistence = new JPAPersistence(entityManagerFactory);
 					bind(Persistence.class).toInstance(persistence);
 
+                    TimestampService timestampService = new TimezoneTimestampService(DateTimeZone.forOffsetHours(1));
+                    bind(TimestampService.class).toInstance(timestampService);
+
                     SystemSettingsRepository systemSettingsRepository = new PersistentSystemSettingsRepository(persistence);
                     bind(SystemSettingsRepository.class).toInstance(systemSettingsRepository);
                     SystemSettings systemSettings = systemSettingsRepository.getSystemSettings();
@@ -115,12 +121,12 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 
 					WundergroundWeatherService weatherService = new WundergroundWeatherService(transport, systemSettings.getWundergroundAPIKey());
 					weatherService.setRetryCount(5);
-					WeatherScore weatherScore = WeatherScore.withService(weatherService).base(100)
+					WeatherScore weatherScore = WeatherScore.withServices(weatherService, timestampService).base(100)
 							.subtract(1).perDegreeBelow(Temperature.degreesCelcius(15))
 							.subtract(1).perDegreeAbove(Temperature.degreesCelcius(25))
-							.subtract(3).perMillimeterPrecipitation()
+							.subtract(5).perMillimeterPrecipitation()
 							.subtract(1).perKilometerPerHourWindSpeedAbove(Speed.kilometersPerHour(10));
-					RouteService routeService = new DefaultRouteService(directionsService,
+					RouteService routeService = new DefaultRouteService(directionsService, timestampService,
 							DesirabilityScore.forTravelMode(TravelMode.BICYCLING).base(0).subtract(1).perMinute().addWeatherScore(weatherScore),
 							DesirabilityScore.forTravelMode(TravelMode.WALKING).base(20).subtract(1).perMinute().addWeatherScore(weatherScore),
 							DesirabilityScore.forTravelMode(TravelMode.PUBLIC_TRANSIT).base(80).subtract(1).perMinute(),

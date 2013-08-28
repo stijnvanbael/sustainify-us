@@ -7,7 +7,7 @@ public class SubtractPrecipitationWeatherScore extends WeatherScore {
 	private final int score;
 
 	public SubtractPrecipitationWeatherScore(WeatherScore weatherScore, int score) {
-		super(weatherScore.getWeatherService());
+		super(weatherScore.getWeatherService(), weatherScore.getTimestampService());
 		this.weatherScore = weatherScore;
 		this.score = score;
 	}

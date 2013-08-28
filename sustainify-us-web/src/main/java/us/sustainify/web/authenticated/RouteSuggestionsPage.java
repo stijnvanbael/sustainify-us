@@ -10,6 +10,7 @@ import org.joda.time.LocalTime;
 import us.sustainify.common.domain.model.organisation.DayOfWeek;
 import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
+import us.sustainify.common.domain.service.system.TimestampService;
 import us.sustainify.commute.domain.model.route.ScoredRoute;
 import us.sustainify.commute.domain.repository.ScoredRouteRepository;
 import us.sustainify.web.SessionContext;
@@ -27,14 +28,16 @@ import com.google.sitebricks.http.Get;
 @Show("RouteSuggestions.html")
 public class RouteSuggestionsPage extends AbstractAuthenticatedPage {
 	private final ScoredRouteRepository scoredRouteRepository;
-	private List<ScoredRoute> coworkerRoutes;
+    private final TimestampService timestampService;
+    private List<ScoredRoute> coworkerRoutes;
 
 	@Inject
 	public RouteSuggestionsPage(SessionContext sessionContext, AuthenticationService<SustainifyUser, SimpleCredential<SustainifyUser>> authenticationService,
-			LocationService locationService, ScoredRouteRepository scoredRouteRepository) {
+			LocationService locationService, ScoredRouteRepository scoredRouteRepository, TimestampService timestampService) {
 		super(sessionContext, authenticationService, locationService);
 		this.scoredRouteRepository = scoredRouteRepository;
-	}
+        this.timestampService = timestampService;
+    }
 
 	@Get
 	public void get() {
@@ -43,7 +46,7 @@ public class RouteSuggestionsPage extends AbstractAuthenticatedPage {
 	}
 
     public boolean isBeforeArrival() {
-        LocalTime now = LocalTime.now();
+        LocalTime now = timestampService.getCurrentTime();
         return now.isBefore(getSessionContext().getArrival());
     }
 
@@ -75,7 +78,7 @@ public class RouteSuggestionsPage extends AbstractAuthenticatedPage {
 
 	public ScoredRoute getChosenRoute() {
 		User user = getSessionContext().getAuthentication().getUser();
-		return scoredRouteRepository.findRouteByUserAndDay(user, LocalDate.now());
+		return scoredRouteRepository.findRouteByUserAndDay(user, timestampService.getCurrentDate());
 	}
 
     public String getDestination() {

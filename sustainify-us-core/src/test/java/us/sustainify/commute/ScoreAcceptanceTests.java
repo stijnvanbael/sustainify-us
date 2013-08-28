@@ -44,8 +44,8 @@ public class ScoreAcceptanceTests extends AbstractRouteAcceptanceTests {
 		routes(walking, byBicycle, byPublicTransit, byCar);
 		weather(RAINY);
 
-		assertScore(user, byBicycle, 100);
-		assertScore(user, walking, 100);
+		assertScore(user, byBicycle, 50);
+		assertScore(user, walking, 50);
 		assertScore(user, byPublicTransit, 25);
 		assertScore(user, byCar, 5);
 	}

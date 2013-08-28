@@ -7,6 +7,7 @@ import javax.inject.Inject;
 import org.joda.time.LocalDate;
 
 import us.sustainify.common.domain.model.organisation.Organisation;
+import us.sustainify.common.domain.service.system.TimestampService;
 import us.sustainify.commute.domain.model.route.ScoredRoute;
 import be.appify.framework.persistence.Persistence;
 import be.appify.framework.repository.AbstractPersistentRepository;
@@ -15,10 +16,13 @@ import be.appify.framework.security.domain.User;
 
 public class PersistentScoredRouteRepository extends AbstractPersistentRepository<ScoredRoute> implements ScoredRouteRepository {
 
-	@Inject
-	public PersistentScoredRouteRepository(Persistence persistence) {
+    private final TimestampService timestampService;
+
+    @Inject
+	public PersistentScoredRouteRepository(Persistence persistence, TimestampService timestampService) {
 		super(persistence, ScoredRoute.class);
-	}
+        this.timestampService = timestampService;
+    }
 
 	@Override
 	public void store(final ScoredRoute scoredRoute) {
@@ -46,7 +50,7 @@ public class PersistentScoredRouteRepository extends AbstractPersistentRepositor
 		return doInTransaction(new TransactionalJob<List<ScoredRoute>, ScoredRoute>() {
 			@Override
 			public List<ScoredRoute> execute() {
-				LocalDate now = LocalDate.now();
+				LocalDate now = timestampService.getCurrentDate();
 				LocalDate from = now.minusDays(days);
 				return find().where("user.organisation").equalTo(organisation).and("day").greaterThanOrEqualTo(from.toDate()).orderBy("day").descending()
 						.asList();

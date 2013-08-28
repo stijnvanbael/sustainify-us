@@ -5,7 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.util.Iterator;
 import java.util.List;
 
-import org.joda.time.DateMidnight;
 import org.joda.time.DateTime;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
@@ -19,6 +18,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 import us.sustainify.common.domain.model.organisation.*;
+import us.sustainify.common.domain.service.system.TimestampService;
 import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
 import us.sustainify.commute.domain.model.desirability.WeatherScore;
 import us.sustainify.commute.domain.model.route.Route;
@@ -71,9 +71,9 @@ public abstract class AbstractRouteAcceptanceTests {
 			.conditionType(WeatherConditionType.CLEAR)
 			.build();
 
-	protected static Interval today() {
-		DateTime start = new DateMidnight().toDateTime();
-		DateTime end = start.plusDays(1).minusMillis(1);
+    protected static Interval today() {
+		DateTime start = DateTime.parse("2013-08-01T00:00:00");
+		DateTime end = DateTime.parse("2013-08-01T23:59:59");
 		return new Interval(start, end);
 	}
 
@@ -92,16 +92,22 @@ public abstract class AbstractRouteAcceptanceTests {
 	@Mock
 	private ScoredRouteRepository scoredRouteRepository;
 
+    @Mock
+    private TimestampService timestampService;
+
 	private final List<ScoredRoute> storedRoutes = Lists.newArrayList();
 
 	@Before
 	public void before() {
-		weatherScore = WeatherScore.withService(weatherService).base(100)
+        Mockito.when(timestampService.getCurrentDate()).thenReturn(TODAY.getStart().toLocalDate());
+        Mockito.when(timestampService.getCurrentTime()).thenReturn(LocalTime.parse("12:00"));
+        Mockito.when(timestampService.getCurrentTimestamp()).thenReturn(TODAY.getStart().toLocalDate().toLocalDateTime(LocalTime.parse("12:00")));
+		weatherScore = WeatherScore.withServices(weatherService, timestampService).base(100)
 				.subtract(1).perDegreeBelow(Temperature.degreesCelcius(15))
 				.subtract(1).perDegreeAbove(Temperature.degreesCelcius(25))
-				.subtract(10).perMillimeterPrecipitation()
+				.subtract(5).perMillimeterPrecipitation()
 				.subtract(1).perKilometerPerHourWindSpeedAbove(Speed.kilometersPerHour(10));
-		routeService = new DefaultRouteService(directionsService,
+		routeService = new DefaultRouteService(directionsService, timestampService,
 				DesirabilityScore.forTravelMode(TravelMode.BICYCLING).base(0).subtract(1).perMinute().addWeatherScore(weatherScore),
 				DesirabilityScore.forTravelMode(TravelMode.WALKING).base(20).subtract(1).perMinute().addWeatherScore(weatherScore),
 				DesirabilityScore.forTravelMode(TravelMode.PUBLIC_TRANSIT).base(80).subtract(1).perMinute(),
@@ -110,10 +116,7 @@ public abstract class AbstractRouteAcceptanceTests {
 				.build();
 		user.getPreferences().setHomeLocation(SOUDERTON);
         for(DayOfWeek dayOfWeek : DayOfWeek.values()) {
-            OfficeDay officeDay = new OfficeDay();
-            officeDay.setDayOfWeek(dayOfWeek);
-            officeDay.setUser(user);
-            user.getPreferences().getOfficeHours().add(officeDay);
+            user.getPreferences().getOfficeHours().add(new OfficeDay(user, dayOfWeek, null, null));
         }
 		OfficeDay officeDay = user.getPreferences().getOfficeHours().get(TODAY.getStart().getDayOfWeek() - 1);
 		officeDay.setArrival(LocalTime.parse("08:00"));

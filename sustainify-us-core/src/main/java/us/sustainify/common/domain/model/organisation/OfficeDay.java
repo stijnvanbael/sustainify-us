@@ -24,6 +24,16 @@ public class OfficeDay extends AbstractEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
+    protected OfficeDay() {
+    }
+
+    public OfficeDay(User user, DayOfWeek dayOfWeek, LocalTime arrival, LocalTime departure) {
+        this.user = user;
+        this.dayOfWeek = dayOfWeek;
+        this.arrival = arrival;
+        this.departure = departure;
+    }
+
 	public LocalTime getArrival() {
 		return arrival;
 	}
