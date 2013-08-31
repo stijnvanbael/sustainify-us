@@ -55,7 +55,7 @@ public class StatisticsAcceptanceTests {
 
         TestStatistics statistics = sarah.getStatistics();
         TestStatisticDataSet<Mass> collectiveCarbonEmissions = statistics.collective().carbonEmissions();
-        assertThat(collectiveCarbonEmissions.between(TestSystem.START, TestSystem.END), equalTo(Mass.kilograms(124.92)));
+        assertThat(collectiveCarbonEmissions.between(TestSystem.START, TestSystem.END), equalTo(Mass.grams(1249.2)));
     }
 
     @Test
@@ -103,7 +103,7 @@ public class StatisticsAcceptanceTests {
         assertThat(averageDistanceByCar.between(TestSystem.START, TestSystem.END), equalTo(Length.kilometers(296)));
 
         TestStatisticDataSet<Length> averageDistanceByPublicTransit = statistics.average().distanceBy(TravelMode.PUBLIC_TRANSIT);
-        assertThat(averageDistanceByPublicTransit.between(TestSystem.START, TestSystem.END), equalTo(Length.kilometers(48)));
+        assertThat(averageDistanceByPublicTransit.between(TestSystem.START, TestSystem.END), equalTo(Length.kilometers(68)));
 
         TestStatisticDataSet<Length> averageDistanceByBicycle = statistics.average().distanceBy(TravelMode.BICYCLING);
         assertThat(averageDistanceByBicycle.between(TestSystem.START, TestSystem.END), equalTo(Length.kilometers(112)));

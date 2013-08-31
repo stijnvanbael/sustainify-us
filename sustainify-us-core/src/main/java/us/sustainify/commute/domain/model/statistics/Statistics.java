@@ -37,7 +37,7 @@ public class Statistics {
         private List<RouteStatistic> individualStatistics;
         private List<RouteStatistic> collectiveStatistics;
         private Map<TravelMode, Mass> carbonEmissions;
-        private int numberOfEmployees;
+        private long numberOfEmployees;
 
         public Builder individualStatistics(List<RouteStatistic> individualStatistics) {
             this.individualStatistics = individualStatistics;
@@ -54,7 +54,7 @@ public class Statistics {
             return this;
         }
 
-        public Builder numberOfEmployees(int numberOfEmployees) {
+        public Builder numberOfEmployees(long numberOfEmployees) {
             this.numberOfEmployees = numberOfEmployees;
             return this;
         }

@@ -6,6 +6,7 @@ import be.appify.framework.common.security.service.SimpleAuthenticationService;
 import be.appify.framework.location.domain.Location;
 import be.appify.framework.location.service.LocationService;
 import be.appify.framework.persistence.Persistence;
+import be.appify.framework.persistence.Transaction;
 import be.appify.framework.persistence.jpa.JPAPersistence;
 import be.appify.framework.quantity.Length;
 import be.appify.framework.quantity.Speed;
@@ -69,6 +70,8 @@ public class TestSystem {
         EntityManagerFactory entityManagerFactory = javax.persistence.Persistence.createEntityManagerFactory("sustainify-us");
         Persistence persistence = new JPAPersistence(entityManagerFactory);
 
+        truncateData(persistence);
+
         TimestampService timestampService = Mockito.mock(TimestampService.class);
         Mockito.when(timestampService.getCurrentDate()).thenReturn(LocalDate.parse("2013-08-01"));
         Mockito.when(timestampService.getCurrentTimestamp()).thenReturn(LocalDateTime.parse("2013-08-01T12:00"));
@@ -111,6 +114,12 @@ public class TestSystem {
         statisticsRepository = new PersistentStatisticsRepository(persistence, systemSettings);
     }
 
+    private void truncateData(Persistence persistence) {
+        Transaction transaction = persistence.beginTransaction();
+        transaction.execute("TRUNCATE SCHEMA public AND COMMIT");
+        transaction.commit();
+    }
+
     public TestOrganisation organisation(String name) {
         TestOrganisation organisation = new TestOrganisation(name, this);
         organisationRepository.store(organisation.getOrganisation());
@@ -140,8 +149,7 @@ public class TestSystem {
             transit.setHeadsign("1 " + destination.getName());
             route.setTransit(transit);
         }
-        Mockito.when(directionsService.findRoutes(origin, destination, travelMode, arrival))
-        .thenReturn(Sets.newHashSet(route));
+        Mockito.when(directionsService.findRoutes(origin, destination, travelMode, arrival)).thenReturn(Sets.newHashSet(route));
     }
 
     private double modifier(TravelMode travelMode) {

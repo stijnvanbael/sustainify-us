@@ -13,7 +13,7 @@ public class StatisticsCollection {
     private StatisticDataSet<Mass> carbonEmissions;
     private Map<TravelMode, StatisticDataSet<Length>> distance;
 
-    public StatisticsCollection(List<RouteStatistic> statistics, Map<TravelMode, Mass> carbonEmissions, int divisor) {
+    public StatisticsCollection(List<RouteStatistic> statistics, Map<TravelMode, Mass> carbonEmissions, long divisor) {
         this.carbonEmissions = new StatisticDataSet<>(Calculator.MASS);
         this.distance = Maps.newHashMap();
         for (TravelMode travelMode : TravelMode.values()) {
@@ -24,7 +24,7 @@ public class StatisticsCollection {
                 Interval interval = routeStatistic.getInterval();
                 if(routeStatistic.getTravelMode() == travelMode) {
                     this.carbonEmissions.add(interval, emissionsPer100km.multiply(routeStatistic.getDistance().getKilometers() / (50 * divisor)));
-                    distance.add(interval, routeStatistic.getDistance().multiply(2));
+                    distance.add(interval, routeStatistic.getDistance().multiply(2.0 / divisor));
                 }
             }
         }

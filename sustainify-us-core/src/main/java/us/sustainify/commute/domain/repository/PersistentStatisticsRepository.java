@@ -10,7 +10,6 @@ import com.google.common.collect.Maps;
 import org.joda.time.LocalDate;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.common.domain.model.system.SystemSettings;
-import us.sustainify.common.domain.repository.system.SystemSettingsRepository;
 import us.sustainify.commute.domain.model.route.TravelMode;
 import us.sustainify.commute.domain.model.statistics.Aggregation;
 import us.sustainify.commute.domain.model.statistics.RouteStatistic;
@@ -18,6 +17,7 @@ import us.sustainify.commute.domain.model.statistics.Statistics;
 
 import javax.annotation.Nullable;
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -34,7 +34,24 @@ public class PersistentStatisticsRepository extends AbstractPersistentRepository
             "and scored_route.day between :start and :end\n" +
             "group by route.travel_mode, year(scored_route.day), %1$s\n" +
             "order by %1$s, route.travel_mode;";
-    private static final Function<Object, RouteStatistic> MAPPER = new Function<Object, RouteStatistic>() {
+
+    private static final String COLLECTIVE_QUERY =
+            "select sum(route.distance) as distance," +
+                    " route.travel_mode," +
+                    " year(scored_route.day) as year," +
+                    " %1$s as interval," +
+                    " '%2$s' as aggregation\n" +
+                    "from route\n" +
+                    "inner join scored_route on route.id = scored_route.route_id\n" +
+                    "where scored_route.day between :start and :end\n" +
+                    "group by route.travel_mode, year(scored_route.day), %1$s\n" +
+                    "order by %1$s, route.travel_mode;";
+
+    private static final String COUNT_USERS =
+            "select count(distinct sr.user_id)\n" +
+                    "from scored_route sr\n" +
+                    "where sr.day between :start and :end";
+    private static final Function<Object, RouteStatistic> ROUTE_STATISTIC_MAPPER = new Function<Object, RouteStatistic>() {
         @Nullable
         @Override
         public RouteStatistic apply(@Nullable Object input) {
@@ -61,6 +78,13 @@ public class PersistentStatisticsRepository extends AbstractPersistentRepository
         }
     };
     private final SystemSettings systemSettings;
+    private static final Function<Object, BigInteger> COUNT_MAPPER = new Function<Object, BigInteger>() {
+        @Nullable
+        @Override
+        public BigInteger apply(@Nullable Object input) {
+            return (BigInteger) input;
+        }
+    };
 
     public PersistentStatisticsRepository(Persistence persistence, SystemSettings systemSettings) {
         super(persistence, RouteStatistic.class);
@@ -69,20 +93,25 @@ public class PersistentStatisticsRepository extends AbstractPersistentRepository
 
     @Override
     public Statistics getStatisticsFor(final SustainifyUser user, LocalDate from, LocalDate to, final Aggregation aggregateBy) {
-        final Map<String, Object> parameters = Maps.newHashMap();
-        parameters.put("user_id", user.getId());
-        parameters.put("start", from.toDate());
-        parameters.put("end", to.toDate());
+        final Map<String, Object> individualParameters = Maps.newHashMap();
+        individualParameters.put("user_id", user.getId());
+        individualParameters.put("start", from.toDate());
+        individualParameters.put("end", to.toDate());
+        final Map<String, Object> collectiveParameters = Maps.newHashMap();
+        collectiveParameters.put("start", from.toDate());
+        collectiveParameters.put("end", to.toDate());
         return doInTransaction(new TransactionalJob<Statistics, RouteStatistic>() {
             @Override
             public Statistics execute() {
-                List<RouteStatistic> individualResults = find().byNativeQuery(String.format(INDIVIDUAL_QUERY, aggregation(aggregateBy), aggregateBy.name()), parameters, MAPPER).asList();
-                return buildStatistics(individualResults);
+                List<RouteStatistic> individualResults = find().byNativeQuery(String.format(INDIVIDUAL_QUERY, aggregation(aggregateBy), aggregateBy.name()), individualParameters, ROUTE_STATISTIC_MAPPER).asList();
+                List<RouteStatistic> collectiveResults = find().byNativeQuery(String.format(COLLECTIVE_QUERY, aggregation(aggregateBy), aggregateBy.name()), collectiveParameters, ROUTE_STATISTIC_MAPPER).asList();
+                BigInteger numberOfEmployees = count().byNativeQuery(COUNT_USERS, collectiveParameters, COUNT_MAPPER).asSingle();
+                return buildStatistics(individualResults, collectiveResults, numberOfEmployees.longValue());
             }
         });
     }
 
-    private Statistics buildStatistics(List<RouteStatistic> individualResults) {
+    private Statistics buildStatistics(List<RouteStatistic> individualResults, List<RouteStatistic> collectiveResults, long numberOfEmployees) {
         Map<TravelMode, Mass> carbonEmissions = Maps.newHashMap();
         carbonEmissions.put(TravelMode.PUBLIC_TRANSIT, Mass.grams(systemSettings.getPublicTransitEmissions()));
         carbonEmissions.put(TravelMode.CAR, Mass.grams(systemSettings.getCarEmissions()));
@@ -90,8 +119,8 @@ public class PersistentStatisticsRepository extends AbstractPersistentRepository
         carbonEmissions.put(TravelMode.WALKING, Mass.grams(0.0));
         return Statistics.create()
                 .individualStatistics(individualResults)
-                .collectiveStatistics(individualResults)
-                .numberOfEmployees(10)
+                .collectiveStatistics(collectiveResults)
+                .numberOfEmployees(numberOfEmployees)
                 .carbonEmissions(carbonEmissions)
                 .build();
     }
