@@ -18,7 +18,7 @@
         <class>be.appify.framework.security.domain.Authentication</class>
 		<properties>
 			<property name="javax.persistence.jdbc.driver" value="org.hsqldb.jdbcDriver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:mem:sustainify-us-test" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:hsqldb:file:${user.home}/.hsqldb/sustainify-us-test" />
 			<property name="javax.persistence.jdbc.user" value="sa" />
 			<property name="javax.persistence.jdbc.password" value="" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.HSQLDialect" />

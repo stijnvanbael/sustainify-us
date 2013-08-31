@@ -10,10 +10,9 @@ import java.util.List;
 public class TestUserHistoryRoute extends TestUserHistory {
     private final TravelMode travelMode;
     private final VehicleType vehicleType;
-    private int offset = 0;
 
-    public TestUserHistoryRoute(TestUser user, TestSystem system, TravelMode travelMode, VehicleType vehicleType) {
-        super(user, system);
+    public TestUserHistoryRoute(TestUser user, TestSystem system, TravelMode travelMode, VehicleType vehicleType, int offset) {
+        super(user, system, offset);
         this.travelMode = travelMode;
         this.vehicleType = vehicleType;
     }

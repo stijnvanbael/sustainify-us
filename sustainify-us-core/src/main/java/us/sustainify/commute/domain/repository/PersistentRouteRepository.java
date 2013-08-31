@@ -18,7 +18,6 @@ public class PersistentRouteRepository extends AbstractPersistentRepository<Rout
 		return doInTransaction(new TransactionalJob<Route, Route>() {
 			@Override
 			public Route execute() {
-				// FIXME: assure uniqueness of route codes
 				List<Route> routes = find().where("code").equalTo(code).asList();
 				return routes.isEmpty() ? null : routes.get(0);
 			}

@@ -2,10 +2,6 @@ package us.sustainify.commute;
 
 import be.appify.framework.quantity.Length;
 import be.appify.framework.quantity.Mass;
-import org.hamcrest.CoreMatchers;
-import org.joda.time.LocalDate;
-import org.joda.time.Period;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -31,29 +27,28 @@ public class StatisticsAcceptanceTests {
     private void given() {
         sarah = organisation.user("Sarah")
                 .route(TravelMode.CAR, Length.kilometers(12))
-                .route(VehicleType.BUS, Length.kilometers(12))
+                .route(TravelMode.PUBLIC_TRANSIT, Length.kilometers(12))
                 .route(TravelMode.BICYCLING, Length.kilometers(13));
         TestUser mark = organisation.user("Mark")
                 .route(TravelMode.CAR, Length.kilometers(16))
-                .route(VehicleType.BUS, Length.kilometers(16))
+                .route(TravelMode.PUBLIC_TRANSIT, Length.kilometers(16))
                 .route(TravelMode.BICYCLING, Length.kilometers(18));
         TestUser tina = organisation.user("Tina")
                 .route(TravelMode.CAR, Length.kilometers(6))
-                .route(VehicleType.BUS, Length.kilometers(6))
+                .route(TravelMode.PUBLIC_TRANSIT, Length.kilometers(6))
                 .route(TravelMode.BICYCLING, Length.kilometers(6));
 
-        organisation.settings().averageCarbonEmissions(TravelMode.CAR, 120)
-                .averageCarbonEmissions(VehicleType.BUS, 90);
+        system.settings().averageCarbonEmissions(TravelMode.CAR, 120)
+                .averageCarbonEmissions(TravelMode.PUBLIC_TRANSIT, 90);
 
         sarah.history().route(TravelMode.CAR).times(9)
-                .route(VehicleType.BUS).times(6)
+                .route(TravelMode.PUBLIC_TRANSIT).times(6)
                 .route(TravelMode.BICYCLING).times(6);
         mark.history().route(TravelMode.CAR).times(21);
-        tina.history().route(VehicleType.BUS).times(5)
+        tina.history().route(TravelMode.PUBLIC_TRANSIT).times(5)
                 .route(TravelMode.BICYCLING).times(15);
     }
 
-    @Ignore
     @Test
     public void collectiveCarbonEmissions() {
         given();
@@ -63,7 +58,6 @@ public class StatisticsAcceptanceTests {
         assertThat(collectiveCarbonEmissions.between(TestSystem.START, TestSystem.END), equalTo(Mass.kilograms(124.92)));
     }
 
-    @Ignore
     @Test
     public void collectiveDistancePerTravelMode() {
         given();
@@ -79,20 +73,18 @@ public class StatisticsAcceptanceTests {
         assertThat(collectiveDistanceByBicycle.between(TestSystem.START, TestSystem.END), equalTo(Length.kilometers(336)));
     }
 
-    @Ignore
     @Test
     public void individualCarbonEmissions() {
         given();
 
         TestStatistics statistics = sarah.getStatistics();
         TestStatisticDataSet<Mass> individualCarbonEmissions = statistics.individual().carbonEmissions();
-        assertThat(individualCarbonEmissions.between(TestSystem.START, TestSystem.END), equalTo(Mass.kilograms(38.88)));
+        assertThat(individualCarbonEmissions.between(TestSystem.START, TestSystem.END), equalTo(Mass.grams(388.8)));
 
         TestStatisticDataSet<Mass> averageCarbonEmissions = statistics.average().carbonEmissions();
-        assertThat(averageCarbonEmissions.between(TestSystem.START, TestSystem.END), equalTo(Mass.kilograms(41.64)));
+        assertThat(averageCarbonEmissions.between(TestSystem.START, TestSystem.END), equalTo(Mass.grams(416.4)));
     }
 
-    @Ignore
     @Test
     public void individualDistancePerTravelMode() {
         given();

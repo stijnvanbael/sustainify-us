@@ -62,8 +62,8 @@ public class TestSystem {
     private final WeatherService weatherService;
     private final DirectionsService directionsService;
     private final LocationService locationService;
-    private final SystemSettings systemSettings;
     private final StatisticsRepository statisticsRepository;
+    private final SystemSettings systemSettings;
 
     public TestSystem() {
         EntityManagerFactory entityManagerFactory = javax.persistence.Persistence.createEntityManagerFactory("sustainify-us");
@@ -108,7 +108,7 @@ public class TestSystem {
                 RouteScore.forTravelMode(TravelMode.PUBLIC_TRANSIT).perKilometer(5),
                 RouteScore.forTravelMode(TravelMode.CAR).perKilometer(1));
 
-        statisticsRepository = new PersistentStatisticsRepository(persistence);
+        statisticsRepository = new PersistentStatisticsRepository(persistence, systemSettings);
     }
 
     public TestOrganisation organisation(String name) {
@@ -161,7 +161,7 @@ public class TestSystem {
     public void confirmRoute(SustainifyUser user, final TravelMode travelMode, final VehicleType vehicleType, LocalDate date) {
         Route route = Collections2.filter(routeService.findRoutesFor(user, user.getPreferences().getDefaultLocation()), new Predicate<Route>() {
             @Override
-            public boolean apply(@Nullable Route input) {
+            public boolean apply(Route input) {
                 Transit transit = input.getSubroutes().get(0).getTransit();
                 return input.getTravelMode() == travelMode && (vehicleType == null || (transit != null && transit.getVehicleType() == vehicleType));
             }
@@ -174,5 +174,9 @@ public class TestSystem {
     public TestStatistics getStatisticsFor(TestUser user) {
         Statistics statistics = statisticsRepository.getStatisticsFor(user.getUser(), START, END, Aggregation.MONTH);
         return new TestStatistics(statistics);
+    }
+
+    public TestSystemSettings settings() {
+        return new TestSystemSettings(systemSettings);
     }
 }

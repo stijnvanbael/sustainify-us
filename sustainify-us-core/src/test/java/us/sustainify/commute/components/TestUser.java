@@ -59,7 +59,7 @@ public class TestUser {
     }
 
     public TestUserHistory history() {
-        return new TestUserHistory(this, system);
+        return new TestUserHistory(this, system, 0);
     }
 
     public SustainifyUser getUser() {

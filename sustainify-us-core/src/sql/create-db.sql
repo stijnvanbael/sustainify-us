@@ -53,8 +53,8 @@ CREATE TABLE route (
 	destination_latitude NUMERIC(12,9) NOT NULL,
 	destination_longitude NUMERIC(12,9) NOT NULL,
 	parent_route_id VARCHAR(100),
-	departure_time TIMESTAMP,
-	arrival_time TIMESTAMP,
+	departure_time TIME,
+	arrival_time TIME,
 	headsign VARCHAR(100),
 	vehicle_type VARCHAR(25)
 );

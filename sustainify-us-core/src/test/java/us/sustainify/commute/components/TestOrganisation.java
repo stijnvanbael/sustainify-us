@@ -14,10 +14,6 @@ public class TestOrganisation {
                 new OrganisationLocation("HQ", new Location("Rockvale", 34.6, 52.9)));
     }
 
-    public TestOrganisationSettings settings() {
-        return new TestOrganisationSettings(this);
-    }
-
     public TestUser user(String name) {
         TestUser user = new TestUser(name, this, system);
         system.store(user.getUser());
