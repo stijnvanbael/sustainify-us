@@ -8,6 +8,7 @@ import org.joda.time.LocalDate;
 
 import org.joda.time.LocalTime;
 import us.sustainify.common.domain.model.organisation.DayOfWeek;
+import us.sustainify.common.domain.model.organisation.OfficeDay;
 import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.common.domain.service.system.TimestampService;
@@ -67,9 +68,14 @@ public class RouteSuggestionsPage extends AbstractAuthenticatedPage {
     public OfficeDayViewModel getOfficeDay()  {
         SustainifyUser user = getSessionContext().getAuthentication().getUser();
         if(getSessionContext().isTimesOverridden()) {
-            return new OfficeDayViewModel(getSessionContext().getArrival(), getSessionContext().getDeparture());
+            return new OfficeDayViewModel(user, DayOfWeek.today(), getSessionContext().getArrival(), getSessionContext().getDeparture());
         }
-        return new OfficeDayViewModel(user.getPreferences().getOfficeHours().get(DayOfWeek.today().ordinal()));
+        List<OfficeDay> officeHours = user.getPreferences().getOfficeHours();
+        int dayOfWeek = DayOfWeek.today().ordinal();
+        if(officeHours.size() > dayOfWeek) {
+            return new OfficeDayViewModel(officeHours.get(dayOfWeek));
+        }
+        return new OfficeDayViewModel(user, DayOfWeek.today(), null, null);
     }
 
 	public List<ScoredRoute> getCoworkerRoutes() {

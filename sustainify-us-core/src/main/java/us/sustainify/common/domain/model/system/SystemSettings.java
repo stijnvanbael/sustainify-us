@@ -16,14 +16,17 @@ public class SystemSettings extends AbstractEntity {
     @Column(name = "wunderground_api_key", length = 100)
     private String wundergroundAPIKey = "";
 
-    @Column(name = "car_emissions", nullable = false, columnDefinition = "numeric default 0")
-    private int carEmissions;
+    @Column(name = "car_emissions", nullable = false)
+    private double carEmissions;
 
-    @Column(name = "public_transit_emissions", nullable = false, columnDefinition = "numeric default 0")
-    private int publicTransitEmissions;
+    @Column(name = "public_transit_emissions", nullable = false)
+    private double publicTransitEmissions;
 
-    @Column(name = "bicycling_emissions", nullable = false, columnDefinition = "numeric default 0")
-    private int bicyclingEmissions;
+    @Column(name = "bicycle_emissions", nullable = false)
+    private double bicycleEmissions;
+
+    public SystemSettings() {
+    }
 
     public String getWundergroundAPIKey() {
         return wundergroundAPIKey;
@@ -41,29 +44,35 @@ public class SystemSettings extends AbstractEntity {
         this.googleAPIKey = googleAPIKey;
     }
 
-    public void setCarbonEmissions(TravelMode travelMode, int grammesPerKilometer) {
-        switch (travelMode) {
-            case CAR:
-                carEmissions = grammesPerKilometer;
-                break;
-            case PUBLIC_TRANSIT:
-                publicTransitEmissions = grammesPerKilometer;
-                break;
-            case BICYCLING:
-                bicyclingEmissions = grammesPerKilometer;
-                break;
-        }
-    }
-
-    public Integer getCarEmissions() {
+    public double getCarEmissions() {
         return carEmissions;
     }
 
-    public Integer getPublicTransitEmissions() {
+    public double getPublicTransitEmissions() {
         return publicTransitEmissions;
     }
 
-    public Integer getBicyclingEmissions() {
-        return bicyclingEmissions;
+    public double getBicycleEmissions() {
+        return bicycleEmissions;
+    }
+
+    public void setCarEmissions(double carEmissions) {
+        this.carEmissions = carEmissions;
+    }
+
+    public void setPublicTransitEmissions(double publicTransitEmissions) {
+        this.publicTransitEmissions = publicTransitEmissions;
+    }
+
+    public void setBicycleEmissions(double bicycleEmissions) {
+        this.bicycleEmissions = bicycleEmissions;
+    }
+
+    public void copyInto(SystemSettings other) {
+        other.setGoogleAPIKey(googleAPIKey);
+        other.setWundergroundAPIKey(wundergroundAPIKey);
+        other.setBicycleEmissions(bicycleEmissions);
+        other.setCarEmissions(carEmissions);
+        other.setPublicTransitEmissions(publicTransitEmissions);
     }
 }

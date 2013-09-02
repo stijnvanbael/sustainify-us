@@ -115,7 +115,7 @@ public class PersistentStatisticsRepository extends AbstractPersistentRepository
         Map<TravelMode, Mass> carbonEmissions = Maps.newHashMap();
         carbonEmissions.put(TravelMode.PUBLIC_TRANSIT, Mass.grams(systemSettings.getPublicTransitEmissions()));
         carbonEmissions.put(TravelMode.CAR, Mass.grams(systemSettings.getCarEmissions()));
-        carbonEmissions.put(TravelMode.BICYCLING, Mass.grams(systemSettings.getBicyclingEmissions()));
+        carbonEmissions.put(TravelMode.BICYCLING, Mass.grams(systemSettings.getBicycleEmissions()));
         carbonEmissions.put(TravelMode.WALKING, Mass.grams(0.0));
         return Statistics.create()
                 .individualStatistics(individualResults)

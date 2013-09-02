@@ -11,7 +11,17 @@ public class TestSystemSettings {
     }
 
     public TestSystemSettings averageCarbonEmissions(TravelMode travelMode, int grammesPerKilometer) {
-        systemSettings.setCarbonEmissions(travelMode, grammesPerKilometer);
+        switch (travelMode) {
+            case BICYCLING:
+                systemSettings.setBicycleEmissions(grammesPerKilometer);
+                break;
+            case PUBLIC_TRANSIT:
+                systemSettings.setPublicTransitEmissions(grammesPerKilometer);
+                break;
+            case CAR:
+                systemSettings.setCarEmissions(grammesPerKilometer);
+                break;
+        }
         return this;
     }
 }

@@ -16,6 +16,8 @@ import com.google.sitebricks.headless.Reply;
 import com.google.sitebricks.headless.Service;
 import com.google.sitebricks.http.Post;
 
+import java.util.List;
+
 // TODO: rename to preferences
 @At("/authenticated/settings")
 @Service
@@ -40,10 +42,20 @@ public class SettingsServiceProvider extends AbstractAuthenticatedPage {
 	public Reply<?> saveSettings() {
 		SustainifyUser user = getSessionContext().getAuthentication().getUser();
 		getSessionContext().setRoutes(null);
-        OfficeDay officeDay = user.getPreferences().getOfficeHours().get(DayOfWeek.today().ordinal());
+        OfficeDay officeDay = getOfficeDay(user);
         getSessionContext().setArrival(officeDay.getArrival());
         getSessionContext().setDeparture(officeDay.getDeparture());
 		userRepository.store(user);
 		return Reply.saying().redirect(target);
 	}
+
+    private OfficeDay getOfficeDay(SustainifyUser user) {
+        List<OfficeDay> officeHours = user.getPreferences().getOfficeHours();
+        int dayOfWeek = DayOfWeek.today().ordinal();
+        if(officeHours.size() > dayOfWeek) {
+            return officeHours.get(dayOfWeek);
+        }
+        OfficeDay officeDay = new OfficeDay(user, DayOfWeek.today(), null, null);
+        return  officeDay;
+    }
 }

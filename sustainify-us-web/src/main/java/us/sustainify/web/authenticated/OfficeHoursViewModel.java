@@ -30,11 +30,9 @@ public class OfficeHoursViewModel {
         if(dayOfWeek.ordinal() < officeHours.size()) {
             return officeHours.get(dayOfWeek.ordinal());
         }
-        OfficeDay day = new OfficeDay();
-        day.setUser(user);
-        day.setDayOfWeek(dayOfWeek);
-        officeHours.add(day);
-        return day;
+        OfficeDay officeDay = new OfficeDay(user, dayOfWeek, null, null);
+        officeHours.add(officeDay);
+        return officeDay;
     }
 
     public OfficeDayViewModel getMonday() {

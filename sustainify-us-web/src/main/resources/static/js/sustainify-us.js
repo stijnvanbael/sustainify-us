@@ -264,6 +264,18 @@ $(function() {
              },
              'wundergroundAPIKey' : {
                  required : true
+             },
+             'carEmissions' : {
+                 required : true,
+                 number: true
+             },
+             'publicTransitEmissions' : {
+                 required : true,
+                 number: true
+             },
+             'bicycleEmissions' : {
+                 required : true,
+                 number: true
              }
          },
          highlight : function(label) {

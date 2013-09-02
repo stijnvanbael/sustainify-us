@@ -78,7 +78,10 @@ CREATE TABLE office_day (
 CREATE TABLE system_settings (
 	id VARCHAR(100) NOT NULL,
 	google_api_key VARCHAR(100),
-	wunderground_api_key VARCHAR(100)
+	wunderground_api_key VARCHAR(100),
+	car_emissions NUMERIC(12,4) NOT NULL,
+	public_transit_emissions NUMERIC(12,4) NOT NULL,
+	bicycle_emissions NUMERIC(12,4) NOT NULL
 );
 
 

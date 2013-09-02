@@ -20,6 +20,7 @@ import us.sustainify.common.domain.model.organisation.OrganisationLocation;
 import us.sustainify.common.domain.model.organisation.SustainifyUser;
 import us.sustainify.common.domain.model.system.SystemSettings;
 import us.sustainify.common.domain.service.system.SystemSetupService;
+import us.sustainify.commute.domain.model.route.TravelMode;
 
 import javax.inject.Inject;
 
@@ -39,6 +40,9 @@ public class SetupPage {
     private String organisationHQLocation;
     private String googleAPIKey;
     private String wundergroundAPIKey;
+    private double carEmissions;
+    private double publicTransitEmissions;
+    private double bicycleEmissions;
 
     @Inject
     public SetupPage(SystemSetupService systemSetupService, LocationService locationService,
@@ -59,12 +63,18 @@ public class SetupPage {
         Validate.notNull(organisationHQLocation);
         Validate.notNull(googleAPIKey);
         Validate.notNull(wundergroundAPIKey);
+        Validate.notNull(carEmissions);
+        Validate.notNull(publicTransitEmissions);
+        Validate.notNull(bicycleEmissions);
 
         locationService.setAPIKey(googleAPIKey);
         weatherService.setAPIKey(wundergroundAPIKey);
         SystemSettings systemSettings = new SystemSettings();
         systemSettings.setGoogleAPIKey(googleAPIKey);
         systemSettings.setWundergroundAPIKey(wundergroundAPIKey);
+        systemSettings.setCarEmissions(carEmissions);
+        systemSettings.setPublicTransitEmissions(publicTransitEmissions);
+        systemSettings.setBicycleEmissions(bicycleEmissions);
 
         Location location = locationService.getLocation(organisationHQLocation);
 
@@ -118,5 +128,17 @@ public class SetupPage {
 
     public void setWundergroundAPIKey(String wundergroundAPIKey) {
         this.wundergroundAPIKey = wundergroundAPIKey;
+    }
+
+    public void setCarEmissions(double carEmissions) {
+        this.carEmissions = carEmissions;
+    }
+
+    public void setPublicTransitEmissions(double publicTransitEmissions) {
+        this.publicTransitEmissions = publicTransitEmissions;
+    }
+
+    public void setBicycleEmissions(double bicycleEmissions) {
+        this.bicycleEmissions = bicycleEmissions;
     }
 }

@@ -2,7 +2,9 @@ package us.sustainify.web.authenticated;
 
 import org.apache.commons.lang.StringUtils;
 import org.joda.time.LocalTime;
+import us.sustainify.common.domain.model.organisation.DayOfWeek;
 import us.sustainify.common.domain.model.organisation.OfficeDay;
+import us.sustainify.common.domain.model.organisation.SustainifyUser;
 
 public class OfficeDayViewModel {
     private final OfficeDay officeDay;
@@ -12,10 +14,8 @@ public class OfficeDayViewModel {
         this.officeDay = officeDay;
     }
 
-    public OfficeDayViewModel(LocalTime arrival, LocalTime departure) {
-        this.officeDay = new OfficeDay();
-        officeDay.setArrival(arrival);
-        officeDay.setDeparture(departure);
+    public OfficeDayViewModel(SustainifyUser user, DayOfWeek dayOfWeek, LocalTime arrival, LocalTime departure) {
+        this.officeDay = new OfficeDay(user, dayOfWeek, arrival, departure);
     }
 
     public String getArrival() {

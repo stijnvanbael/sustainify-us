@@ -33,8 +33,7 @@ public class PersistentSystemSettingsRepository extends AbstractPersistentReposi
                 if(settingsToSave == null) {
                     settingsToSave = new SystemSettings();
                 }
-                settingsToSave.setGoogleAPIKey(systemSettings.getGoogleAPIKey());
-                settingsToSave.setWundergroundAPIKey(systemSettings.getWundergroundAPIKey());
+                systemSettings.copyInto(settingsToSave);
                 store(settingsToSave);
                 return null;
             }
