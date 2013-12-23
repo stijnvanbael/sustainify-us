@@ -11,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 public class StatisticDataSet<T> {
-    private List<StatisticData> data;
+    private List<StatisticData<T>> data;
     private Calculator<T> calculator;
 
     public StatisticDataSet(Calculator<T> calculator) {
@@ -21,6 +21,10 @@ public class StatisticDataSet<T> {
 
     public int size() {
         return data.size();
+    }
+
+    public List<StatisticData<T>> getData() {
+        return data;
     }
 
     public StatisticData<T> get(int index) {
@@ -47,7 +51,7 @@ public class StatisticDataSet<T> {
                 return;
             }
         }
-        data.add(new StatisticData(calculator, value, interval));
+        data.add(new StatisticData<>(calculator, value, interval));
         Collections.sort(data);
     }
 }

@@ -43,9 +43,7 @@ import us.sustainify.commute.domain.model.desirability.DesirabilityScore;
 import us.sustainify.commute.domain.model.desirability.WeatherScore;
 import us.sustainify.commute.domain.model.route.TravelMode;
 import us.sustainify.commute.domain.model.score.RouteScore;
-import us.sustainify.commute.domain.repository.PersistentRouteRepository;
-import us.sustainify.commute.domain.repository.PersistentScoredRouteRepository;
-import us.sustainify.commute.domain.repository.ScoredRouteRepository;
+import us.sustainify.commute.domain.repository.*;
 import us.sustainify.commute.domain.service.*;
 import us.sustainify.commute.domain.service.google.directions.GoogleDirectionsService;
 import us.sustainify.web.filter.AuthenticationFilter;
@@ -109,6 +107,7 @@ public class ApplicationConfiguration extends GuiceServletContextListener {
 					bind(ScoredRouteRepository.class).to(PersistentScoredRouteRepository.class);
 					bind(EncryptionService.class).toInstance(encryptionService);
 					bind(RouteChoiceService.class).to(DefaultRouteChoiceService.class);
+                    bind(StatisticsRepository.class).to(PersistentStatisticsRepository.class);
 
 					AuthenticationService<SustainifyUser, SimpleCredential<SustainifyUser>> authenticationService = new SimpleAuthenticationService<>(
 							userRepository, authenticationRepository);

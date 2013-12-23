@@ -16,6 +16,7 @@ import us.sustainify.commute.domain.model.statistics.RouteStatistic;
 import us.sustainify.commute.domain.model.statistics.Statistics;
 
 import javax.annotation.Nullable;
+import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
@@ -86,6 +87,7 @@ public class PersistentStatisticsRepository extends AbstractPersistentRepository
         }
     };
 
+    @Inject
     public PersistentStatisticsRepository(Persistence persistence, SystemSettings systemSettings) {
         super(persistence, RouteStatistic.class);
         this.systemSettings = systemSettings;
